@@ -218,7 +218,8 @@ const KEY = import.meta.env.PUBLIC_GEOAPIFY_KEY ?? "";
       var suppBag = (o.bagages || 0) * T.supplementBagage;
       var suppPers = Math.max(0, (o.passengers || 1) - 4) * T.supplementPersonne;
       var raw = T.priseEnCharge + distCost + wait + suppBag + suppPers;
-      var rounded = Math.round(raw / T.chute) * T.chute;
+      // Arrondi à la chute (0,10 €), robuste aux artefacts de virgule flottante (calcul en centimes)
+      var rounded = Math.round(Math.round(raw * 100) / 10) * 10 / 100;
       var total = Math.max(rounded, T.minimum);
       var dayCode = o.allerRetour ? "A" : "C", nightCode = o.allerRetour ? "B" : "D";
       var tarif = fOut <= 0.001 ? dayCode : (fOut >= 0.999 ? nightCode : dayCode + "/" + nightCode);
