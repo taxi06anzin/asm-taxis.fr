@@ -29,7 +29,8 @@ const graph = {
   "@context": "https://schema.org",
   "@graph": schema,
 };
-const GTM_ID = "GTM-W3SBRBL9";
+// ID Google Tag Manager : configurable via variable d'environnement (repli sur la valeur par défaut)
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID ?? "GTM-W3SBRBL9";
 ---
 
 <!doctype html>
