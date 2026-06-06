@@ -2,7 +2,9 @@
 import Base from "../layouts/Base.astro";
 import WhatsAppForm from "../components/WhatsAppForm.astro";
 import Faq from "../components/Faq.astro";
+import Reviews from "../components/Reviews.astro";
 import { site, localBusinessNode, faqNode } from "../data/site";
+import { reviewsSummary } from "../data/reviews";
 
 const title = "Taxi Lille 24h/24 | ASM Taxis — Artisan ADS n°180";
 const description =
@@ -29,7 +31,7 @@ const services = [
 
 const faq = [
   { q: "Comment réserver un taxi à Lille avec ASM Taxis ?", a: `Appelez le <a class="text-ink font-bold underline" href="${site.phoneHref}">${site.phone}</a> ou envoyez votre demande par WhatsApp, 24h/24. Indiquez le lieu de départ, la destination, l'heure et le nombre de passagers : nous confirmons immédiatement.` },
-  { q: "ASM Taxis est-il un taxi officiel ?", a: `Oui. ASM Taxis est un artisan taxi licencié, titulaire de l'autorisation de stationnement (ADS) Lille n°${site.ads}, conduit par ${site.owner}. Les courses sont facturées au tarif préfectoral du département du Nord.` },
+  { q: "ASM Taxis est-il un taxi officiel ?", a: `Oui. ASM Taxis est un service de taxi licencié, titulaire de l'autorisation de stationnement (ADS) Lille n°${site.ads}. Les courses sont facturées au tarif préfectoral du département du Nord.` },
   { q: "Quels moyens de paiement acceptez-vous ?", a: "Espèces et carte bancaire à bord. Une note de taxi détaillée est remise sur demande, pratique pour les notes de frais professionnelles." },
   { q: "Êtes-vous disponible la nuit et le week-end ?", a: "Oui, 7j/7 et 24h/24. La nuit et le week-end, la réservation à l'avance est conseillée pour garantir votre prise en charge." },
   { q: "Desservez-vous toute la métropole lilloise ?", a: "Oui. Nous prenons en charge Lille, Loos et l'ensemble de la métropole lilloise (MEL), ainsi que les trajets longue distance (Paris, Belgique, aéroports) sur devis." },
@@ -38,6 +40,12 @@ const faq = [
 const schema = [
   localBusinessNode({
     description,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: reviewsSummary.ratingValue,
+      reviewCount: reviewsSummary.reviewCount,
+      bestRating: reviewsSummary.bestRating,
+    },
     makesOffer: services.map((s) => ({ "@type": "Offer", name: s.t, url: `${site.url}${s.href}` })),
   }),
   faqNode(faq),
@@ -95,7 +103,7 @@ const schema = [
     <div class="container mx-auto px-4 max-w-3xl prose-custom">
       <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Votre taxi à Lille, simple et fiable</h2>
       <p class="text-neutral-700 leading-relaxed mb-4">
-        Besoin d'un <strong>taxi à Lille</strong> ? ASM Taxis est un service de taxi artisanal conduit par {site.owner}, titulaire de l'<strong>ADS Lille n°{site.ads}</strong>. Pas d'application à installer, pas d'intermédiaire : vous appelez ou écrivez sur WhatsApp, et vous parlez directement au chauffeur qui viendra vous prendre en charge.
+        Besoin d'un <strong>taxi à Lille</strong> ? ASM Taxis est un service de taxi licencié, titulaire de l'<strong>ADS Lille n°{site.ads}</strong>. Pas d'application à installer, pas d'intermédiaire : vous appelez ou écrivez sur WhatsApp, et vous parlez directement à votre chauffeur de taxi lillois qui viendra vous prendre en charge.
       </p>
       <p class="text-neutral-700 leading-relaxed mb-4">
         Nous assurons vos déplacements dans Lille et la métropole lilloise : centre-ville, Vieux-Lille, Euralille, mais aussi <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-aeroport-lille/">l'aéroport de Lille-Lesquin</a>, les <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-gare-lille-flandres/">gares Lille Flandres</a> et <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-gare-lille-europe/">Lille Europe</a>. Pour les sorties tardives ou les vols matinaux, notre <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-nuit/">service de taxi de nuit</a> fonctionne 7j/7.
@@ -142,6 +150,8 @@ const schema = [
       </div>
     </div>
   </section>
+
+  <Reviews />
 
   <Faq items={faq} title="Taxi Lille : vos questions" />
 

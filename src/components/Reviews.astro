@@ -1,0 +1,28 @@
+---
+import { site } from "../data/site";
+import { reviews, reviewsSummary } from "../data/reviews";
+---
+<section class="py-16 bg-white border-t border-neutral-100">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-extrabold mb-3">Ce que disent nos clients</h2>
+      <div class="inline-flex items-center gap-2 text-lg">
+        <span class="text-taxi text-2xl tracking-tight" aria-hidden="true">★★★★★</span>
+        <strong>{reviewsSummary.ratingValue.toString().replace(".", ",")}/5</strong>
+        <span class="text-neutral-500">· {reviewsSummary.reviewCount} avis Google</span>
+      </div>
+      <p class="mt-2">
+        <a href={site.googleProfile} target="_blank" rel="noopener noreferrer" class="text-ink font-bold underline hover:text-taxi">Voir tous les avis sur Google →</a>
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      {reviews.map((r) => (
+        <figure class="bg-cream rounded-2xl p-6 border border-neutral-100">
+          <div class="text-taxi mb-3" aria-hidden="true">★★★★★</div>
+          <blockquote class="text-neutral-700 text-sm leading-relaxed">“{r.text}”</blockquote>
+          <figcaption class="mt-4 font-bold text-sm">{r.author}<span class="font-normal text-neutral-500"> · client vérifié Google</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

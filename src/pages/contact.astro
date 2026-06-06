@@ -30,7 +30,7 @@ const schema = [
           <li><span class="font-bold">Téléphone :</span> <a href={site.phoneHref} class="text-ink underline hover:text-taxi font-bold">{site.phone}</a></li>
           <li><span class="font-bold">WhatsApp :</span> <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" class="text-ink underline hover:text-taxi">Écrire un message</a></li>
           <li><span class="font-bold">E-mail :</span> <a href={`mailto:${site.email}`} class="text-ink underline hover:text-taxi">{site.email}</a></li>
-          <li><span class="font-bold">Exploitant :</span> {site.owner}, artisan taxi</li>
+          <li><span class="font-bold">Exploitant :</span> ASM TAXI (SASU)</li>
           <li><span class="font-bold">Autorisation :</span> ADS Lille n°{site.ads}</li>
           <li><span class="font-bold">Secteur :</span> {site.address.locality} ({site.address.postalCode}) — {site.zone}</li>
           <li><span class="font-bold">Horaires :</span> 7j/7, 24h/24</li>
@@ -43,6 +43,26 @@ const schema = [
       <div>
         <WhatsAppForm heading="Envoyer une demande" />
       </div>
+    </div>
+  </section>
+
+  <section class="pb-14 bg-white">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <h2 class="text-2xl font-extrabold mb-4">Notre secteur</h2>
+      <div class="rounded-2xl overflow-hidden border border-neutral-200 shadow-sm">
+        <iframe
+          title="Zone desservie par ASM Taxis — Lille et métropole lilloise"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=2.9300%2C50.5650%2C3.2200%2C50.7150&layer=mapnik&marker=50.60921%2C3.01625"
+          width="100%"
+          height="380"
+          style="border:0;"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <p class="text-sm text-neutral-500 mt-3">
+        Basés à {site.address.locality} ({site.address.postalCode}), nous desservons Lille et toute la métropole lilloise, 24h/24.
+        <a href={site.googleProfile} target="_blank" rel="noopener noreferrer" class="text-ink font-bold underline hover:text-taxi ml-1">Itinéraire &amp; avis sur Google →</a>
+      </p>
     </div>
   </section>
 </Base>

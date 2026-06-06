@@ -34,7 +34,7 @@ export const site = {
     address: "14 rue Saint-Jean, 75017 Paris",
     url: "https://cm2c.net",
   },
-  geo: { lat: 50.6147, lng: 3.0145 },
+  geo: { lat: 50.60921, lng: 3.01625 },
   zone: "Lille et métropole lilloise (MEL)",
   tagline: "Taxi Lille 24h/24 — artisan licencié ADS n°180",
 } as const;
@@ -85,9 +85,9 @@ export function localBusinessNode(extra: Record<string, unknown> = {}) {
       "Wattrelos", "Wervicq-Sud",
     ].map((name) => ({ "@type": "City", name })),
     provider: {
-      "@type": "Person",
-      name: site.owner,
-      jobTitle: "Chauffeur de taxi (artisan)",
+      "@type": "Organization",
+      name: site.name,
+      legalName: site.legalName,
     },
     identifier: {
       "@type": "PropertyValue",
