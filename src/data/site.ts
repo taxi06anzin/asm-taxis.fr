@@ -55,8 +55,9 @@ export const navLinks = [
 // enrichi de l'identité réelle (artisan + ADS) pour l'E-E-A-T.
 export function localBusinessNode(extra: Record<string, unknown> = {}) {
   return {
-    "@type": "TaxiService",
+    "@type": "LocalBusiness",
     "@id": `${site.url}/#business`,
+    additionalType: "https://schema.org/TaxiService",
     name: site.name,
     legalName: site.legalName,
     url: site.url,
