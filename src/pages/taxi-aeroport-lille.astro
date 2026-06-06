@@ -13,8 +13,8 @@ const description =
 const faq = [
   { q: "Combien de temps pour rejoindre l'aéroport de Lille-Lesquin depuis le centre de Lille ?", a: "Comptez environ 20 à 30 minutes selon le trafic et le point de départ. Nous vous conseillons de prévoir une marge confortable et nous adaptons l'heure de prise en charge à votre vol." },
   { q: "Suivez-vous l'horaire réel de mon vol ?", a: "Oui. Communiquez-nous votre numéro de vol : nous surveillons les éventuels retards ou avances pour ajuster l'heure d'arrivée et éviter toute attente inutile." },
-  { q: "Proposez-vous aussi les aéroports de Charleroi et Bruxelles ?", a: "Oui, ASM Taxis assure les transferts vers Charleroi (BSCA) et Bruxelles-Zaventem depuis Lille et la métropole, sur devis forfaitaire établi à l'avance." },
-  { q: "Le prix du transfert aéroport est-il connu à l'avance ?", a: `Pour Lesquin, la course est au compteur (tarif préfectoral du Nord) ; pour Charleroi et Bruxelles, nous fixons un forfait clair avant le départ. Appelez le ${site.phone} pour une estimation.` },
+  { q: "Proposez-vous aussi les aéroports de Charleroi et Bruxelles ?", a: "Oui, ASM Taxis assure les transferts vers Charleroi (BSCA) et Bruxelles-Zaventem depuis Lille et la métropole, avec une estimation de prix établie à l'avance." },
+  { q: "Le prix du transfert aéroport est-il connu à l'avance ?", a: `Le prix d'un taxi est celui du compteur (tarif préfectoral du Nord) : il n'y a pas de forfait inventé par le chauffeur. Nous vous communiquons toutefois une estimation précise à l'avance et pouvons garantir un prix maximum (remise appliquée si le compteur dépasse). Appelez le ${site.phone} ou utilisez notre calculateur.` },
   { q: "Puis-je réserver un taxi pour un vol très tôt le matin ?", a: "Bien sûr, nous roulons 24h/24. Pour les départs nocturnes ou très matinaux, réservez la veille afin de garantir votre prise en charge à l'heure." },
 ];
 
@@ -42,13 +42,13 @@ const schema = [
         Prendre un <strong>taxi pour l'aéroport de Lille-Lesquin</strong> doit être la partie la plus simple de votre voyage. ASM Taxis vient vous chercher à l'adresse de votre choix — domicile, hôtel, entreprise — et vous dépose directement au terminal, bagages portés. Au retour, nous vous attendons à la sortie, même en cas de retard de vol.
       </p>
       <p class="text-neutral-700 leading-relaxed mb-4">
-        Service de taxi titulaire de l'<strong>ADS Lille n°{site.ads}</strong>, ASM Taxis est ponctuel et transparent : course au compteur pour Lesquin (tarif préfectoral du Nord), forfait annoncé à l'avance pour les aéroports plus lointains. Vous savez à quoi vous attendre avant de monter à bord.
+        Service de taxi titulaire de l'<strong>ADS Lille n°{site.ads}</strong>, ASM Taxis est ponctuel et transparent : course au compteur (tarif préfectoral du Nord) avec estimation annoncée à l'avance pour les aéroports plus lointains. Le compteur reste la référence, et une remise peut être appliquée. Vous savez à quoi vous attendre avant de monter à bord.
       </p>
       <h3 class="text-xl font-bold mt-8 mb-3">Aéroports desservis depuis Lille</h3>
       <ul class="space-y-2 text-neutral-700">
         <li>✈️ <strong>Lille-Lesquin (LIL)</strong> — au compteur, 20 à 30 min depuis le centre.</li>
-        <li>✈️ <strong>Charleroi / Brussels South (CRL)</strong> — forfait, idéal pour les vols low-cost.</li>
-        <li>✈️ <strong>Bruxelles-Zaventem (BRU)</strong> — forfait, berline ou van pour les groupes.</li>
+        <li>✈️ <strong>Charleroi / Brussels South (CRL)</strong> — estimation à l'avance, idéal pour les vols low-cost.</li>
+        <li>✈️ <strong>Bruxelles-Zaventem (BRU)</strong> — estimation à l'avance, berline ou van pour les groupes.</li>
         <li>✈️ <strong>Paris CDG &amp; Orly</strong> — longue distance sur devis, véhicule confort.</li>
       </ul>
     </div>

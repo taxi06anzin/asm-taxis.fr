@@ -8,7 +8,7 @@ const KEY = import.meta.env.PUBLIC_GEOAPIFY_KEY ?? "";
     <div class="text-center mb-8">
       <span class="inline-block bg-taxi text-ink text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3">Estimation en ligne</span>
       <h2 class="text-3xl md:text-4xl font-extrabold">Calculez le prix de votre course</h2>
-      <p class="text-neutral-300 mt-2">Distance routière réelle + barème officiel préfecture du Nord 2026. Estimation indicative — le compteur fait foi.</p>
+      <p class="text-neutral-300 mt-2">Distance routière réelle + barème officiel préfecture du Nord 2026. Prix <strong>estimatif</strong> (maximum au compteur) — le taximètre reste la référence légale, une remise peut être appliquée.</p>
     </div>
 
     {KEY === "" ? (
@@ -89,14 +89,14 @@ const KEY = import.meta.env.PUBLIC_GEOAPIFY_KEY ?? "";
 
         <div id="calc-result" class="hidden mt-6 pt-6 border-t border-neutral-200">
           <div class="text-center">
-            <p class="text-sm text-neutral-500">Estimation</p>
+            <p class="text-sm text-neutral-500">Prix estimatif (maximum au compteur)</p>
             <p class="text-5xl font-extrabold text-ink"><span id="calc-total">—</span> €</p>
             <p id="calc-perperson" class="text-sm font-medium text-taxi-dark mt-1 hidden"></p>
             <p id="calc-meta" class="text-sm text-neutral-500 mt-1"></p>
           </div>
           <ul id="calc-detail" class="mt-5 text-sm text-neutral-700 space-y-1"></ul>
           <a id="calc-wa" href="#" target="_blank" rel="noopener" class="mt-5 block text-center bg-[#128C47] hover:bg-[#0d7a3a] text-white font-bold py-3 rounded-lg transition-colors">Réserver ce trajet sur WhatsApp</a>
-          <p class="text-xs text-neutral-400 mt-3 text-center">Estimation calculée sur la distance routière et le barème préfectoral du Nord 2026. Le prix réel est celui affiché au compteur du taxi (trafic, attente, itinéraire). Minimum de perception : 8 €.</p>
+          <p class="text-xs text-neutral-400 mt-3 text-center">Prix estimatif calculé sur la distance routière et le barème préfectoral du Nord 2026. Le prix applicable reste celui affiché au taximètre en fin de course (trafic, attente, itinéraire) ; ce montant est un plafond estimé et une remise peut être appliquée. Ce n'est pas un forfait. Minimum de perception : 8 €.</p>
         </div>
       </div>
     )}
@@ -288,7 +288,7 @@ const KEY = import.meta.env.PUBLIC_GEOAPIFY_KEY ?? "";
           "• Type : " + (allerRetour ? "aller-retour" : "aller simple") + (waitMin > 0 ? (", attente " + waitMin + " min") : "") + "\n" +
           "• Véhicule : " + vehicule + "\n" +
           "• Passagers : " + passengers + (bagages > 0 ? ("\n• Bagages : " + bagages) : "") + "\n" +
-          "• Estimation en ligne : " + eur(res.total) + " €";
+          "• Prix estimatif (max. compteur) : " + eur(res.total) + " €";
         $("calc-wa").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
 
         $("calc-result").classList.remove("hidden");

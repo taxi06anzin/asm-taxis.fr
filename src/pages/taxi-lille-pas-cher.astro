@@ -25,11 +25,11 @@ const km = [
 const faq = [
   { q: "Comment fonctionne le calculateur de prix ?", a: "Il mesure la distance routière réelle entre votre départ et votre destination (pas à vol d'oiseau) via OpenStreetMap, puis applique le barème officiel de la préfecture du Nord : prise en charge, tarif kilométrique selon l'heure (jour/nuit, dimanche/férié), suppléments et minimum de perception. Le résultat est une estimation : le prix réel est celui affiché au compteur (trafic, attente, itinéraire effectif)." },
   { q: "Le prix change-t-il la nuit, le dimanche ou les jours fériés ?", a: "Oui, comme pour tous les taxis : le tarif de nuit (19h–7h), du dimanche et des jours fériés est majoré (tarifs B/D au lieu de A/C). Si une course chevauche 19h, le calculateur répartit le trajet entre tarif jour et tarif nuit." },
-  { q: "Pourquoi parler de taxi « pas cher » si les tarifs sont réglementés ?", a: "Les tarifs d'un taxi sont fixés par arrêté préfectoral : ils sont les mêmes pour tous les artisans. « Pas cher » avec ASM Taxis signifie : aucun supplément abusif, pas de tarification dynamique (surge), un compteur honnête et un forfait clair annoncé à l'avance pour les longs trajets." },
-  { q: "Puis-je connaître le prix de ma course avant de partir ?", a: `Oui. Pour un trajet local, nous vous donnons une estimation au téléphone ; pour l'aéroport, une gare ou une longue distance, nous fixons un forfait écrit avant le départ. Appelez le ${site.phone} pour un devis gratuit.` },
+  { q: "Pourquoi parler de taxi « pas cher » si les tarifs sont réglementés ?", a: "Les tarifs d'un taxi sont fixés par arrêté préfectoral : ils sont les mêmes pour tous les artisans. « Pas cher » avec ASM Taxis signifie : aucun supplément abusif, pas de tarification dynamique (surge), un compteur honnête, une estimation claire à l'avance et la possibilité d'une remise commerciale sur le montant du compteur." },
+  { q: "Puis-je connaître le prix de ma course avant de partir ?", a: `Le prix exact d'un taxi est celui affiché au compteur en fin de course : la loi interdit au chauffeur d'inventer un forfait. Nous pouvons toutefois vous donner une <strong>estimation précise</strong> à l'avance (calculateur ci-dessus ou par téléphone) et garantir un <strong>prix maximum</strong> — si le compteur dépasse ce plafond, nous appliquons une remise. Appelez le ${site.phone} pour une estimation gratuite.` },
   { q: "Le taxi est-il moins cher qu'un VTC à Lille ?", a: "Cela dépend du moment. Contrairement aux VTC, le taxi ne pratique pas de tarification dynamique : aux heures de pointe, la nuit ou lors d'événements, le prix d'un taxi reste celui du compteur officiel, sans flambée soudaine." },
   { q: "Comment payer ma course ?", a: "En carte bancaire ou en espèces, directement à bord. Une note de taxi détaillée vous est remise sur demande, utile pour vos remboursements professionnels." },
-  { q: "Y a-t-il des forfaits pour l'aéroport et les gares ?", a: `Oui, des forfaits clairs existent pour <a class="text-ink font-bold underline" href="/taxi-aeroport-lille/">l'aéroport</a>, Charleroi, Bruxelles et les longues distances. Pour les <a class="text-ink font-bold underline" href="/taxi-gare-lille-flandres/">gares de Lille</a>, la course est au compteur.` },
+  { q: "Proposez-vous un prix à l'avance pour l'aéroport et les gares ?", a: `Un taxi ne peut pas créer librement de forfait : le prix est celui du compteur (tarif préfectoral). Nous vous donnons une <strong>estimation précise</strong> à l'avance pour <a class="text-ink font-bold underline" href="/taxi-aeroport-lille/">l'aéroport</a>, les <a class="text-ink font-bold underline" href="/taxi-gare-lille-flandres/">gares</a>, Charleroi, Bruxelles ou la longue distance, avec un <strong>prix maximum garanti</strong> (remise si le compteur dépasse). Estimez votre course avec le calculateur ci-dessus.` },
 ];
 
 const schema = [
@@ -43,7 +43,7 @@ const schema = [
   <PageHero
     eyebrow="Tarifs transparents"
     h1="Taxi Lille pas cher : des tarifs clairs"
-    intro="Tarif officiel au compteur, sans majoration cachée ni tarification dynamique. Forfaits annoncés à l'avance pour l'aéroport, les gares et la longue distance. Devis gratuit."
+    intro="Tarif officiel au compteur, sans majoration cachée ni tarification dynamique. Estimation précise à l'avance et prix maximum garanti — le compteur reste la référence, remise possible."
     image="/assets/images/vieux-lille.webp"
     imageAlt="Taxi Lille pas cher — Vieux-Lille, ASM Taxis"
     lcp={true}
@@ -55,7 +55,7 @@ const schema = [
     <div class="container mx-auto px-4 max-w-3xl">
       <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Le bon prix, sans mauvaise surprise</h2>
       <p class="text-neutral-700 leading-relaxed mb-6">
-        Chez ASM Taxis, « pas cher » ne veut pas dire au rabais : cela veut dire <strong>juste et transparent</strong>. Les tarifs sont ceux fixés par l'arrêté préfectoral du Nord, identiques pour tous les taxis. Notre engagement : un compteur honnête, aucun supplément injustifié, et un <strong>forfait écrit à l'avance</strong> dès que vous le demandez.
+        Chez ASM Taxis, « pas cher » ne veut pas dire au rabais : cela veut dire <strong>juste et transparent</strong>. Les tarifs sont ceux fixés par l'arrêté préfectoral du Nord, identiques pour tous les taxis. Notre engagement : un compteur honnête, aucun supplément injustifié, et une <strong>estimation écrite à l'avance avec prix maximum garanti</strong> dès que vous le demandez.
       </p>
 
       <h3 class="text-xl font-bold mb-3">Barème officiel 2026 (préfecture du Nord)</h3>
@@ -95,7 +95,7 @@ const schema = [
 
       <h3 class="text-xl font-bold mt-10 mb-3">3 façons de payer moins cher, sereinement</h3>
       <ul class="space-y-2 text-neutral-700">
-        <li>✅ <strong>Demandez un forfait</strong> pour l'aéroport ou la longue distance : prix fixe, connu d'avance.</li>
+        <li>✅ <strong>Demandez une estimation</strong> pour l'aéroport ou la longue distance : prix maximum connu d'avance, remise possible.</li>
         <li>✅ <strong>Réservez à l'avance</strong> pour optimiser le trajet et éviter l'attente facturée.</li>
         <li>✅ <strong>Partagez le trajet</strong> à plusieurs : le prix de la course est le même, divisé entre passagers.</li>
       </ul>

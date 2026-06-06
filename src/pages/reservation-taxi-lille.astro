@@ -12,7 +12,7 @@ const description =
 const faq = [
   { q: "Comment réserver un taxi à Lille ?", a: `Trois options : appeler le ${site.phone}, remplir le formulaire ci-dessus (envoyé sur WhatsApp), ou écrire directement sur WhatsApp. Vous parlez au chauffeur, la confirmation est immédiate.` },
   { q: "Puis-je réserver à l'avance pour une date précise ?", a: "Oui. Vous pouvez réserver pour le jour même comme pour les jours suivants : déplacement professionnel, train, vol, rendez-vous médical. Indiquez la date et l'heure souhaitées." },
-  { q: "La réservation est-elle payante ou engageante ?", a: "Non. La réservation est gratuite et sans frais. Vous ne payez que la course réalisée, au tarif officiel affiché au compteur ou au forfait convenu." },
+  { q: "La réservation est-elle payante ou engageante ?", a: "Non. La réservation est gratuite et sans frais. Vous ne payez que la course réalisée, au tarif officiel affiché au compteur (une estimation peut être donnée à l'avance, avec remise éventuelle)." },
   { q: "Recevrai-je une confirmation ?", a: "Oui, par téléphone ou par message WhatsApp, avec l'heure de prise en charge. En cas d'imprévu, vous pouvez nous joindre directement pour ajuster." },
   { q: "Puis-je réserver pour quelqu'un d'autre ?", a: "Bien sûr — un proche, un client, un patient. Donnez-nous le lieu de prise en charge, la destination et un numéro de contact pour la personne transportée." },
 ];
@@ -63,7 +63,7 @@ const schema = [
       <ol class="space-y-5">
         {[
           ["Vous nous contactez", "Téléphone, WhatsApp ou formulaire. Précisez départ, destination, heure et nombre de passagers."],
-          ["Nous confirmons", "Confirmation immédiate de la prise en charge et, si besoin, du forfait pour les longues distances."],
+          ["Nous confirmons", "Confirmation immédiate de la prise en charge et, si besoin, d'une estimation de prix pour les longues distances."],
           ["Le chauffeur arrive", "Votre taxi se présente à l'heure et au lieu convenus. Paiement carte ou espèces, reçu sur demande."],
         ].map(([t, d], i) => (
           <li class="flex gap-4">
