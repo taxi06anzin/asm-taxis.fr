@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:ASM Taxis Lille
+N:Taxis;ASM;;;
+ORG:ASM TAXI
+TEL;TYPE=CELL,VOICE:+33642988578
+EMAIL;TYPE=INTERNET:asm.taxis@gmail.com
+URL:https://asm-taxis.fr
+ADR;TYPE=WORK:;;;Loos;Hauts-de-France;59120;France
+NOTE:Taxi Lille 24h/24 - ADS Lille n°180
+END:VCARD

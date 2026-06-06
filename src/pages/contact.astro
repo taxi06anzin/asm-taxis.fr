@@ -65,4 +65,28 @@ const schema = [
       </p>
     </div>
   </section>
+
+  <section class="pb-16 bg-white">
+    <div class="container mx-auto px-4 max-w-5xl grid md:grid-cols-2 gap-6">
+      <!-- Ajouter aux contacts (vCard) -->
+      <div class="bg-cream rounded-2xl p-8 border border-neutral-100 flex flex-col">
+        <h2 class="text-2xl font-extrabold mb-2">Gardez notre numéro à portée de main</h2>
+        <p class="text-neutral-600 mb-6 flex-1">Enregistrez ASM Taxis dans vos contacts en un clic : vous nous rappelez directement à votre prochain trajet.</p>
+        <a href="/asm-taxis.vcf" download class="inline-flex items-center justify-center gap-2 bg-ink text-white font-bold py-4 px-6 rounded-xl hover:bg-ink-soft transition-colors">
+          📇 Enregistrer notre numéro
+        </a>
+      </div>
+      <!-- Avis Google + QR -->
+      <div class="bg-cream rounded-2xl p-8 border border-neutral-100">
+        <h2 class="text-2xl font-extrabold mb-2">Votre avis compte</h2>
+        <p class="text-neutral-600 mb-5">Vous avez voyagé avec nous ? Un avis nous aide énormément. Scannez le QR ou cliquez :</p>
+        <div class="flex items-center gap-5">
+          <img src="/assets/images/qr-avis-google.png" alt="QR code pour laisser un avis Google à ASM Taxis" width="120" height="120" loading="lazy" class="w-28 h-28 rounded-lg bg-white p-1 border border-neutral-200" />
+          <a href={site.googleProfile} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-taxi hover:bg-taxi-dark text-ink font-bold py-3 px-5 rounded-xl transition-colors">
+            ★ Laisser un avis Google
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Base>

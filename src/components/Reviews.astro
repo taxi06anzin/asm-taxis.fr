@@ -11,9 +11,10 @@ import { reviews, reviewsSummary } from "../data/reviews";
         <strong>{reviewsSummary.ratingValue.toString().replace(".", ",")}/5</strong>
         <span class="text-neutral-500">· {reviewsSummary.reviewCount} avis Google</span>
       </div>
-      <p class="mt-2">
-        <a href={site.googleProfile} target="_blank" rel="noopener noreferrer" class="text-ink font-bold underline hover:text-taxi">Voir tous les avis sur Google →</a>
-      </p>
+      <div class="mt-4 flex flex-wrap justify-center gap-3">
+        <a href={site.googleProfile} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-taxi hover:bg-taxi-dark text-ink font-bold py-2.5 px-5 rounded-full transition-colors">★ Laisser un avis Google</a>
+        <a href={site.googleProfile} target="_blank" rel="noopener noreferrer" class="text-ink font-bold underline hover:text-taxi self-center">Voir tous les avis →</a>
+      </div>
     </div>
     <div class="grid md:grid-cols-3 gap-6">
       {reviews.map((r) => (
