@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import WhatsAppForm from "../components/WhatsAppForm.astro";
 import Faq from "../components/Faq.astro";
 import Reviews from "../components/Reviews.astro";
+import CalcCta from "../components/CalcCta.astro";
 import { site, localBusinessNode, faqNode } from "../data/site";
 import { reviewsSummary } from "../data/reviews";
 
@@ -109,7 +110,7 @@ const schema = [
         Nous assurons vos déplacements dans Lille et la métropole lilloise : centre-ville, Vieux-Lille, Euralille, mais aussi <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-aeroport-lille/">l'aéroport de Lille-Lesquin</a>, les <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-gare-lille-flandres/">gares Lille Flandres</a> et <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-gare-lille-europe/">Lille Europe</a>. Pour les sorties tardives ou les vols matinaux, notre <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-nuit/">service de taxi de nuit</a> fonctionne 7j/7.
       </p>
       <p class="text-neutral-700 leading-relaxed">
-        Les courses sont facturées au tarif préfectoral du Nord, affiché au compteur. Pour les longues distances, nous établissons un <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-pas-cher/">devis clair à l'avance</a>. Carte bancaire et espèces acceptées, note de taxi remise sur demande.
+        Les courses sont facturées au tarif préfectoral du Nord, affiché au compteur. Pour préparer votre budget, <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-pas-cher/#calculateur">calculez le prix de votre course en ligne</a> (estimation au barème officiel). Carte bancaire et espèces acceptées, note de taxi remise sur demande.
       </p>
     </div>
   </section>
@@ -150,6 +151,8 @@ const schema = [
       </div>
     </div>
   </section>
+
+  <CalcCta />
 
   <Reviews />
 

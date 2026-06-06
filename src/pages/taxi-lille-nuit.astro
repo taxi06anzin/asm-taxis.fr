@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import PageHero from "../components/PageHero.astro";
 import Faq from "../components/Faq.astro";
 import CallCta from "../components/CallCta.astro";
+import CalcCta from "../components/CalcCta.astro";
 import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
 
 const path = "/taxi-lille-nuit/";
@@ -42,7 +43,7 @@ const schema = [
         Quand les transports en commun s'arrêtent, ASM Taxis continue. Notre <strong>taxi de nuit à Lille</strong> répond à tous les besoins nocturnes : retour de soirée dans le Vieux-Lille, sortie au Zénith ou à l'Aéronef, train de nuit, vol au départ de Lesquin à l'aube, garde médicale ou simple imprévu.
       </p>
       <p class="text-neutral-700 leading-relaxed mb-4">
-        Vous êtes pris en charge par un chauffeur de taxi licencié <strong>(ADS Lille n°{site.ads})</strong> — un professionnel identifié, pas un inconnu. Le trajet est facturé au tarif préfectoral de nuit (tarif officiel majoré), affiché au compteur, réglable en carte ou en espèces.
+        Vous êtes pris en charge par un chauffeur de taxi licencié <strong>(ADS Lille n°{site.ads})</strong> — un professionnel identifié, pas un inconnu. Le trajet est facturé au tarif préfectoral de nuit (tarif officiel majoré), affiché au compteur, réglable en carte ou en espèces — <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-pas-cher/#calculateur">estimez le prix de votre course de nuit</a>.
       </p>
       <div class="grid sm:grid-cols-3 gap-4 mt-8">
         {[
@@ -58,6 +59,8 @@ const schema = [
       </div>
     </div>
   </section>
+
+  <CalcCta title="Le prix de votre course de nuit ?" sub="Le calculateur applique automatiquement le tarif de nuit (et le pro-rata si vous partez avant 19h)." cta="Estimer ma course de nuit" />
 
   <Faq items={faq} title="Taxi Lille nuit : questions fréquentes" />
 

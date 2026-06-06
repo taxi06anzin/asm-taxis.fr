@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import WhatsAppForm from "../components/WhatsAppForm.astro";
 import Faq from "../components/Faq.astro";
+import CalcCta from "../components/CalcCta.astro";
 import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
 
 const path = "/reservation-taxi-lille/";
@@ -76,10 +77,12 @@ const schema = [
         Pour préparer votre trajet, consultez aussi nos pages
         <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-aeroport-lille/">taxi aéroport</a>,
         <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-gare-lille-europe/">gare Lille Europe</a> et
-        <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-nuit/">taxi de nuit</a>.
+        <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-nuit/">taxi de nuit</a>. Vous pouvez aussi <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-pas-cher/#calculateur">calculer le prix de votre course</a> en amont.
       </p>
     </div>
   </section>
+
+  <CalcCta title="Pas sûr du budget ?" sub="Estimez le prix de votre course avant de réserver — distance réelle, barème officiel." cta="Calculer le prix de ma course" />
 
   <Faq items={faq} title="Réservation : questions fréquentes" />
 </Base>
