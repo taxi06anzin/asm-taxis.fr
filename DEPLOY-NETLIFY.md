@@ -24,18 +24,26 @@ git push -u origin main
    - Publish directory : `dist`
 4. **Deploy**. Le site est en ligne sur une URL `*.netlify.app` en ~1 min.
 
-## 3. Brancher le domaine asm-taxis.fr (une fois)
-Dans Netlify : **Site settings → Domain management → Add a custom domain** → `asm-taxis.fr`.
-Netlify indique les enregistrements DNS à créer. Deux options côté OVH :
+## 3. Brancher le domaine asm-taxis.fr (une fois) — config réelle
 
-**Option A — garder le DNS chez OVH (le plus simple) :**
-Dans l'espace OVH → **Domaines → asm-taxis.fr → Zone DNS**, mets :
-- `A`  `@`  → `75.2.60.5` (IP de Netlify Load Balancer)
-- `CNAME`  `www`  → `<ton-site>.netlify.app`
+État actuel du DNS (relevé le 2026-06-06) : domaine géré chez OVH (DNS anycast.me),
+site actuel sur l'IP OVH `46.105.204.100`, emails OVH actifs (MX + SPF).
 
-**Option B — déléguer le DNS à Netlify :** remplace les serveurs DNS (nameservers) OVH par ceux indiqués par Netlify.
+Dans Netlify : **Domain management → Add a domain** → `asm-taxis.fr`.
+Puis dans **OVH → Web Cloud → Noms de domaine → asm-taxis.fr → Zone DNS**, modifie :
 
-> Le HTTPS (certificat SSL) est généré automatiquement par Netlify une fois le DNS propagé (quelques minutes à quelques heures).
+| Type | Sous-domaine | Ancienne valeur | NOUVELLE valeur |
+|---|---|---|---|
+| A | @ (vide) | 46.105.204.100 | **75.2.60.5** (Netlify) |
+| CNAME | www | 46.105.204.100 (A) → supprimer | **`<ton-site>.netlify.app.`** |
+
+⚠️ **NE PAS TOUCHER** (sinon tes emails tombent) :
+- MX : `mx1/mx2/mx3.mail.ovh.net`
+- TXT SPF : `v=spf1 include:mx.ovh.com -all`
+
+> Astuce : déploie et **teste l'URL `*.netlify.app` AVANT** de changer le DNS → bascule sans coupure.
+> Le HTTPS (Let's Encrypt) est généré automatiquement par Netlify une fois le DNS propagé
+> (quelques minutes à quelques heures). Active ensuite **Force HTTPS** dans Netlify.
 
 ## 4. Ensuite, au quotidien
 ```bash
