@@ -1,0 +1,249 @@
+---
+import { site } from "../data/site";
+import { TARIFS, JOURS_FERIES_2026 } from "../data/tarifs";
+const KEY = import.meta.env.PUBLIC_GEOAPIFY_KEY ?? "";
+---
+<section id="calculateur" class="py-16 bg-ink text-white">
+  <div class="container mx-auto px-4 max-w-3xl">
+    <div class="text-center mb-8">
+      <span class="inline-block bg-taxi text-ink text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3">Estimation en ligne</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold">Calculez le prix de votre course</h2>
+      <p class="text-neutral-300 mt-2">Distance routière réelle + barème officiel préfecture du Nord 2026. Estimation indicative — le compteur fait foi.</p>
+    </div>
+
+    {KEY === "" ? (
+      <div class="bg-white/10 border border-white/20 rounded-2xl p-6 text-center">
+        <p class="text-neutral-200">Le calculateur est momentanément indisponible. Appelez-nous pour un devis immédiat :
+          <a href={site.phoneHref} class="text-taxi font-bold underline">{site.phone}</a>.</p>
+      </div>
+    ) : (
+      <div class="bg-white text-ink rounded-2xl p-6 md:p-8 shadow-2xl border-t-4 border-taxi">
+        <form id="calc-form" class="space-y-4" autocomplete="off">
+          <div class="relative">
+            <label for="calc-depart" class="block text-sm font-medium mb-1">Départ</label>
+            <input id="calc-depart" type="text" required placeholder="Adresse, gare, aéroport…" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" role="combobox" aria-autocomplete="list" aria-expanded="false" />
+            <ul id="calc-depart-list" class="absolute z-20 left-0 right-0 bg-white border border-neutral-200 rounded-lg mt-1 shadow-lg hidden max-h-60 overflow-auto"></ul>
+          </div>
+          <div class="relative">
+            <label for="calc-arrivee" class="block text-sm font-medium mb-1">Destination</label>
+            <input id="calc-arrivee" type="text" required placeholder="Adresse, gare, aéroport…" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" role="combobox" aria-autocomplete="list" aria-expanded="false" />
+            <ul id="calc-arrivee-list" class="absolute z-20 left-0 right-0 bg-white border border-neutral-200 rounded-lg mt-1 shadow-lg hidden max-h-60 overflow-auto"></ul>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label for="calc-datetime" class="block text-sm font-medium mb-1">Date &amp; heure</label>
+              <input id="calc-datetime" type="datetime-local" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" />
+            </div>
+            <div>
+              <label for="calc-type" class="block text-sm font-medium mb-1">Type de course</label>
+              <select id="calc-type" class="w-full px-4 py-3 rounded-lg border border-neutral-300 bg-white focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none">
+                <option value="simple">Aller simple</option>
+                <option value="retour">Aller-retour (avec attente)</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="calc-wait-wrap" class="hidden">
+            <label for="calc-wait" class="block text-sm font-medium mb-1">Temps d'attente sur place (minutes)</label>
+            <input id="calc-wait" type="number" min="0" step="5" value="0" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" />
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label for="calc-pax" class="block text-sm font-medium mb-1">Passagers</label>
+              <input id="calc-pax" type="number" min="1" max="8" value="1" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" />
+            </div>
+            <div>
+              <label for="calc-bag" class="block text-sm font-medium mb-1">Bagages encombrants (4e+)</label>
+              <input id="calc-bag" type="number" min="0" value="0" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" />
+            </div>
+          </div>
+
+          <button type="submit" id="calc-submit" class="w-full bg-taxi hover:bg-taxi-dark text-ink font-bold py-4 rounded-lg transition-colors">Estimer le prix</button>
+          <p id="calc-error" class="text-sm text-red-600 hidden" role="alert"></p>
+        </form>
+
+        <div id="calc-result" class="hidden mt-6 pt-6 border-t border-neutral-200">
+          <div class="text-center">
+            <p class="text-sm text-neutral-500">Estimation</p>
+            <p class="text-5xl font-extrabold text-ink"><span id="calc-total">—</span> €</p>
+            <p id="calc-meta" class="text-sm text-neutral-500 mt-1"></p>
+          </div>
+          <ul id="calc-detail" class="mt-5 text-sm text-neutral-700 space-y-1"></ul>
+          <a id="calc-wa" href="#" target="_blank" rel="noopener" class="mt-5 block text-center bg-[#128C47] hover:bg-[#0d7a3a] text-white font-bold py-3 rounded-lg transition-colors">Réserver ce trajet sur WhatsApp</a>
+          <p class="text-xs text-neutral-400 mt-3 text-center">Estimation calculée sur la distance routière et le barème préfectoral du Nord 2026. Le prix réel est celui affiché au compteur du taxi (trafic, attente, itinéraire). Minimum de perception : 8 €.</p>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<script is:inline define:vars={{ KEY, T: TARIFS, HOLIDAYS: JOURS_FERIES_2026, WA: site.whatsapp, PHONE: site.phone }}>
+  (function () {
+    if (!KEY) return;
+    var depart = null, arrivee = null;
+    var $ = function (id) { return document.getElementById(id); };
+
+    // ---------- Autocomplétion Geoapify ----------
+    function setupAutocomplete(inputId, listId, onPick) {
+      var input = $(inputId), list = $(listId), timer = null;
+      input.addEventListener("input", function () {
+        onPick(null); // toute édition invalide la sélection
+        var q = input.value.trim();
+        if (timer) clearTimeout(timer);
+        if (q.length < 3) { list.classList.add("hidden"); return; }
+        timer = setTimeout(function () {
+          var url = "https://api.geoapify.com/v1/geocode/autocomplete?text=" + encodeURIComponent(q) +
+            "&filter=countrycode:fr&bias=proximity:3.06,50.63&limit=5&lang=fr&format=json&apiKey=" + KEY;
+          fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+            var res = (j && j.results) || [];
+            list.innerHTML = "";
+            if (!res.length) { list.classList.add("hidden"); return; }
+            res.forEach(function (f) {
+              var li = document.createElement("li");
+              li.textContent = f.formatted;
+              li.className = "px-4 py-2 text-sm cursor-pointer hover:bg-cream";
+              li.addEventListener("mousedown", function (e) {
+                e.preventDefault();
+                input.value = f.formatted;
+                onPick({ lat: f.lat, lon: f.lon, label: f.formatted });
+                list.classList.add("hidden");
+              });
+              list.appendChild(li);
+            });
+            list.classList.remove("hidden");
+          }).catch(function () { list.classList.add("hidden"); });
+        }, 300);
+      });
+      input.addEventListener("blur", function () { setTimeout(function () { list.classList.add("hidden"); }, 150); });
+    }
+    setupAutocomplete("calc-depart", "calc-depart-list", function (v) { depart = v; });
+    setupAutocomplete("calc-arrivee", "calc-arrivee-list", function (v) { arrivee = v; });
+
+    // ---------- Type aller-retour -> champ attente ----------
+    $("calc-type").addEventListener("change", function () {
+      $("calc-wait-wrap").classList.toggle("hidden", this.value !== "retour");
+    });
+
+    // ---------- Barème ----------
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    function localYmd(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+    function isNightRate(d) {
+      var sundayOrHoliday = (d.getDay() === 0) || HOLIDAYS.indexOf(localYmd(d)) !== -1;
+      var h = d.getHours();
+      var night = (h < T.jourDebut || h >= T.jourFin);
+      return sundayOrHoliday || night;
+    }
+    // fraction nuit d'un trajet (échantillonnage par minute, mi-minute)
+    function nightFraction(startMs, durationSec) {
+      var totalMin = Math.max(1, Math.round(durationSec / 60)), nightMin = 0;
+      for (var i = 0; i < totalMin; i++) {
+        if (isNightRate(new Date(startMs + i * 60000 + 30000))) nightMin++;
+      }
+      return nightMin / totalMin;
+    }
+    function waitingCost(startMs, waitMin) {
+      var c = 0;
+      for (var i = 0; i < waitMin; i++) {
+        var rate = isNightRate(new Date(startMs + i * 60000 + 30000)) ? T.attenteNuit : T.attenteJour;
+        c += rate / 60;
+      }
+      return c;
+    }
+    function eur(n) { return (Math.round(n * 100) / 100).toFixed(2).replace(".", ","); }
+
+    function computeFare(o) {
+      var km = o.distanceM / 1000;
+      var rateDay = o.allerRetour ? T.km.A : T.km.C;
+      var rateNight = o.allerRetour ? T.km.B : T.km.D;
+      var fOut = nightFraction(o.startMs, o.durationSec);
+      var distCost = km * ((1 - fOut) * rateDay + fOut * rateNight);
+      var legs = 1, wait = 0;
+      if (o.allerRetour) {
+        var retStart = o.startMs + o.durationSec * 1000 + o.waitMin * 60000;
+        var fRet = nightFraction(retStart, o.durationSec);
+        distCost += km * ((1 - fRet) * rateDay + fRet * rateNight);
+        legs = 2;
+        if (o.waitMin > 0) wait = waitingCost(o.startMs + o.durationSec * 1000, o.waitMin);
+      }
+      var suppBag = (o.bagages || 0) * T.supplementBagage;
+      var suppPers = Math.max(0, (o.passengers || 1) - 4) * T.supplementPersonne;
+      var raw = T.priseEnCharge + distCost + wait + suppBag + suppPers;
+      var rounded = Math.round(raw / T.chute) * T.chute; // chute (0,10 €)
+      var total = Math.max(rounded, T.minimum);
+      var dayCode = o.allerRetour ? "A" : "C", nightCode = o.allerRetour ? "B" : "D";
+      var tarifLabel = fOut <= 0.001 ? dayCode : (fOut >= 0.999 ? nightCode : dayCode + "/" + nightCode);
+      return {
+        total: total, km: km, legs: legs, distCost: distCost, wait: wait,
+        suppBag: suppBag, suppPers: suppPers, nightFracOut: fOut,
+        minApplied: rounded < T.minimum, tarif: tarifLabel,
+      };
+    }
+
+    // ---------- Soumission ----------
+    $("calc-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var err = $("calc-error");
+      err.classList.add("hidden");
+      if (!depart || !arrivee) {
+        err.textContent = "Choisissez une adresse de départ et de destination dans la liste de suggestions.";
+        err.classList.remove("hidden"); return;
+      }
+      var dtVal = $("calc-datetime").value;
+      var startMs = dtVal ? new Date(dtVal).getTime() : Date.now();
+      var allerRetour = $("calc-type").value === "retour";
+      var waitMin = allerRetour ? Math.max(0, parseInt($("calc-wait").value || "0", 10)) : 0;
+      var passengers = Math.max(1, parseInt($("calc-pax").value || "1", 10));
+      var bagages = Math.max(0, parseInt($("calc-bag").value || "0", 10));
+
+      var btn = $("calc-submit");
+      btn.disabled = true; btn.textContent = "Calcul en cours…";
+
+      var url = "https://api.geoapify.com/v1/routing?waypoints=" + depart.lat + "," + depart.lon +
+        "|" + arrivee.lat + "," + arrivee.lon + "&mode=drive&lang=fr&apiKey=" + KEY;
+      fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+        var p = j && j.features && j.features[0] && j.features[0].properties;
+        if (!p || !p.distance) throw new Error("no route");
+        var res = computeFare({
+          distanceM: p.distance, durationSec: p.time, startMs: startMs,
+          allerRetour: allerRetour, waitMin: waitMin, passengers: passengers, bagages: bagages,
+        });
+
+        $("calc-total").textContent = eur(res.total);
+        var distKm = (res.km).toFixed(1).replace(".", ",");
+        var mins = Math.round(p.time / 60);
+        $("calc-meta").textContent = distKm + " km" + (res.legs === 2 ? " ×2 (aller-retour)" : "") + " · ~" + mins + " min · tarif " + res.tarif;
+
+        var d = $("calc-detail");
+        d.innerHTML = "";
+        function row(k, v) { var li = document.createElement("li"); li.className = "flex justify-between"; li.innerHTML = "<span>" + k + "</span><span class='font-medium'>" + v + " €</span>"; d.appendChild(li); }
+        row("Prise en charge", eur(T.priseEnCharge));
+        row("Distance (" + (res.legs === 2 ? (distKm + " km ×2") : (distKm + " km")) + ", tarif " + res.tarif + ")", eur(res.distCost));
+        if (res.wait > 0) row("Attente sur place", eur(res.wait));
+        if (res.suppBag > 0) row("Suppléments bagages", eur(res.suppBag));
+        if (res.suppPers > 0) row("Supplément passagers (5e+)", eur(res.suppPers));
+        if (res.minApplied) row("Minimum de perception appliqué", eur(T.minimum));
+
+        // Lien WhatsApp pré-rempli
+        var when = dtVal ? new Date(dtVal).toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" }) : "dès que possible";
+        var msg = "Bonjour ASM Taxis, je souhaite réserver une course :\n" +
+          "• Départ : " + depart.label + "\n" +
+          "• Destination : " + arrivee.label + "\n" +
+          "• Quand : " + when + "\n" +
+          "• Type : " + (allerRetour ? ("aller-retour, attente " + waitMin + " min") : "aller simple") + "\n" +
+          "• Passagers : " + passengers + (bagages > 0 ? ("\n• Bagages : " + bagages) : "") + "\n" +
+          "• Estimation en ligne : " + eur(res.total) + " €";
+        $("calc-wa").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
+
+        $("calc-result").classList.remove("hidden");
+        $("calc-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }).catch(function () {
+        err.textContent = "Impossible de calculer l'itinéraire pour ces adresses. Réessayez ou appelez le " + PHONE + ".";
+        err.classList.remove("hidden");
+      }).finally(function () {
+        btn.disabled = false; btn.textContent = "Estimer le prix";
+      });
+    });
+  })();
+</script>
