@@ -15,7 +15,7 @@ export const site = {
   phoneHref: "tel:0642988578",
   whatsapp: "33642988578",
   email: "asm.taxis@gmail.com",
-  googleProfile: "https://share.google/KtLdtWJoNYPqAFO88",
+  googleProfile: "https://share.google/Eezf6WSRDWRkUrIOm",
   address: {
     street: "Entrée 5, Appartement 36, 2 square Pierre Billon",
     locality: "Loos",
