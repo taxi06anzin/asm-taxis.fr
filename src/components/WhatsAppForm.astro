@@ -1,0 +1,76 @@
+---
+import { site } from "../data/site";
+interface Props { heading?: string; headingLevel?: "h2" | "h3"; }
+const { heading = "Réserver votre taxi par WhatsApp", headingLevel = "h2" } = Astro.props;
+const H = headingLevel;
+---
+<div class="bg-white text-ink p-6 md:p-8 rounded-2xl shadow-2xl border-t-4 border-taxi">
+  <H class="text-2xl font-extrabold mb-6 flex items-center gap-2">
+    <span aria-hidden="true">💬</span>{heading}
+  </H>
+  <form id="wa-form" class="space-y-4" aria-label="Formulaire de réservation par WhatsApp">
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label for="wa-name" class="block text-sm font-medium mb-1">Nom</label>
+        <input id="wa-name" name="name" type="text" autocomplete="name" required class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" placeholder="Votre nom" />
+      </div>
+      <div>
+        <label for="wa-phone" class="block text-sm font-medium mb-1">Téléphone</label>
+        <input id="wa-phone" name="phone" type="tel" autocomplete="tel" required class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" placeholder="06 12 34 56 78" />
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label for="wa-date" class="block text-sm font-medium mb-1">Date</label>
+        <input id="wa-date" name="date" type="date" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" />
+      </div>
+      <div>
+        <label for="wa-time" class="block text-sm font-medium mb-1">Heure</label>
+        <input id="wa-time" name="time" type="time" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" />
+      </div>
+    </div>
+    <div>
+      <label for="wa-pickup" class="block text-sm font-medium mb-1">Lieu de départ</label>
+      <input id="wa-pickup" name="pickup" type="text" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" placeholder="Adresse, gare, aéroport..." />
+    </div>
+    <div>
+      <label for="wa-dropoff" class="block text-sm font-medium mb-1">Destination</label>
+      <input id="wa-dropoff" name="dropoff" type="text" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none" placeholder="Adresse, gare, aéroport..." />
+    </div>
+    <div>
+      <label for="wa-persons" class="block text-sm font-medium mb-1">Passagers</label>
+      <select id="wa-persons" name="persons" class="w-full px-4 py-3 rounded-lg border border-neutral-300 bg-white focus:border-taxi focus:ring-2 focus:ring-taxi/30 outline-none">
+        {Array.from({ length: 8 }, (_, i) => i + 1).map((n) => (
+          <option value={n}>{n} passager{n > 1 ? "s" : ""}</option>
+        ))}
+      </select>
+    </div>
+    <button type="submit" class="w-full bg-[#128C47] hover:bg-[#0d7a3a] text-white font-bold py-4 rounded-lg transition-colors">
+      Envoyer la demande sur WhatsApp
+    </button>
+    <p class="text-xs text-neutral-500 text-center">Sans réponse rapide, appelez le <a href={site.phoneHref} class="font-bold text-ink hover:text-taxi">{site.phone}</a>.</p>
+  </form>
+</div>
+
+<script is:inline define:vars={{ wa: site.whatsapp }}>
+  (function () {
+    const form = document.getElementById("wa-form");
+    if (!form) return;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const f = new FormData(form);
+      const get = (k) => (f.get(k) || "").toString().trim();
+      const lines = [
+        "Bonjour ASM Taxis, je souhaite réserver un taxi :",
+        get("name") && "• Nom : " + get("name"),
+        get("phone") && "• Téléphone : " + get("phone"),
+        (get("date") || get("time")) && "• Quand : " + [get("date"), get("time")].filter(Boolean).join(" à "),
+        get("pickup") && "• Départ : " + get("pickup"),
+        get("dropoff") && "• Destination : " + get("dropoff"),
+        get("persons") && "• Passagers : " + get("persons"),
+      ].filter(Boolean);
+      const url = "https://wa.me/" + wa + "?text=" + encodeURIComponent(lines.join("\n"));
+      window.open(url, "_blank");
+    });
+  })();
+</script>

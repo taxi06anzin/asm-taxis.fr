@@ -1,0 +1,18 @@
+---
+import { site } from "../data/site";
+interface Props { label?: string; sub?: string; }
+const { label = "Réserver votre taxi", sub } = Astro.props;
+---
+<div class="bg-ink text-white rounded-2xl p-8 text-center shadow-xl border-b-4 border-taxi">
+  <h2 class="text-2xl md:text-3xl font-extrabold mb-2">{label}</h2>
+  {sub && <p class="text-neutral-300 mb-6 max-w-xl mx-auto">{sub}</p>}
+  <div class="flex flex-col sm:flex-row gap-3 justify-center">
+    <a href={site.phoneHref} class="inline-flex items-center justify-center gap-2 bg-taxi hover:bg-taxi-dark text-ink font-bold py-4 px-8 rounded-xl transition-transform hover:-translate-y-0.5">
+      📞 {site.phone}
+    </a>
+    <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-[#128C47] hover:bg-[#0d7a3a] text-white font-bold py-4 px-8 rounded-xl transition-transform hover:-translate-y-0.5">
+      WhatsApp
+    </a>
+  </div>
+  <p class="text-xs text-neutral-400 mt-4">Artisan licencié · ADS Lille n°{site.ads} · 7j/7, 24h/24</p>
+</div>

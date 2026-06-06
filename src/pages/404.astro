@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+---
+<Base title="Page introuvable | ASM Taxis Lille" description="La page demandée n'existe pas. Réservez votre taxi à Lille au 06 42 98 85 78." path="/404/" noindex={true}>
+  <section class="py-24 bg-white text-center">
+    <div class="container mx-auto px-4 max-w-xl">
+      <p class="text-7xl font-extrabold text-taxi">404</p>
+      <h1 class="text-2xl md:text-3xl font-extrabold mt-4 mb-3">Cette page a pris une autre route</h1>
+      <p class="text-neutral-600 mb-8">La page que vous cherchez n'existe pas ou a été déplacée. Besoin d'un taxi ? Nous sommes joignables 24h/24.</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href={site.phoneHref} class="inline-flex items-center justify-center gap-2 bg-taxi hover:bg-taxi-dark text-ink font-bold py-4 px-8 rounded-xl">📞 {site.phone}</a>
+        <a href="/" class="inline-flex items-center justify-center gap-2 bg-ink text-white font-bold py-4 px-8 rounded-xl hover:bg-ink-soft">Retour à l'accueil</a>
+      </div>
+    </div>
+  </section>
+</Base>

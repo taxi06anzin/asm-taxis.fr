@@ -1,0 +1,24 @@
+# dépendances
+node_modules/
+
+# build
+dist/
+.astro/
+
+# Netlify
+.netlify/
+
+# logs
+*.log
+npm-debug.log*
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

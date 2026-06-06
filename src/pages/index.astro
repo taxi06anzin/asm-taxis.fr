@@ -1,0 +1,158 @@
+---
+import Base from "../layouts/Base.astro";
+import WhatsAppForm from "../components/WhatsAppForm.astro";
+import Faq from "../components/Faq.astro";
+import { site, localBusinessNode, faqNode } from "../data/site";
+
+const title = "Taxi Lille 24h/24 | ASM Taxis — Artisan ADS n°180";
+const description =
+  "ASM Taxis, votre taxi à Lille 24h/24. Artisan licencié ADS n°180. Aéroport Lesquin, gares Lille Flandres & Europe, courses de nuit, longue distance. Réservation au 06 42 98 85 78.";
+
+const flotte = [
+  { img: "mercedes-classe-e", name: "Mercedes Classe E", note: "Berline premium" },
+  { img: "mercedes-glc", name: "Mercedes GLC", note: "SUV premium" },
+  { img: "mercedes-classe-v", name: "Mercedes Classe V", note: "Groupes 4+" },
+  { img: "toyota-prius", name: "Toyota Prius", note: "Hybride" },
+  { img: "toyota-prius-plus", name: "Toyota Prius+", note: "Hybride" },
+  { img: "lexus-nx300h", name: "Lexus NX 300h", note: "Hybride" },
+  { img: "xpeng-g6", name: "XPENG G6", note: "100 % électrique" },
+];
+
+const services = [
+  { href: "/taxi-aeroport-lille/", t: "Taxi aéroport Lille-Lesquin", d: "Transferts aéroport, suivi de vol, prix annoncé à l'avance." },
+  { href: "/taxi-gare-lille-flandres/", t: "Taxi gare Lille Flandres", d: "Dépose et accueil à la gare Lille Flandres, TGV et TER." },
+  { href: "/taxi-gare-lille-europe/", t: "Taxi gare Lille Europe", d: "Euralille, Eurostar et TGV à la gare Lille Europe." },
+  { href: "/taxi-lille-nuit/", t: "Taxi de nuit à Lille", d: "Courses de nuit 7j/7, sorties, gardes, vols tôt le matin." },
+  { href: "/taxi-lille-pas-cher/", t: "Tarifs taxi Lille", d: "Tarif préfectoral au compteur, forfaits clairs, devis gratuit." },
+  { href: "/reservation-taxi-lille/", t: "Réserver un taxi à Lille", d: "Par téléphone ou WhatsApp, en moins d'une minute." },
+];
+
+const faq = [
+  { q: "Comment réserver un taxi à Lille avec ASM Taxis ?", a: `Appelez le <a class="text-ink font-bold underline" href="${site.phoneHref}">${site.phone}</a> ou envoyez votre demande par WhatsApp, 24h/24. Indiquez le lieu de départ, la destination, l'heure et le nombre de passagers : nous confirmons immédiatement.` },
+  { q: "ASM Taxis est-il un taxi officiel ?", a: `Oui. ASM Taxis est un artisan taxi licencié, titulaire de l'autorisation de stationnement (ADS) Lille n°${site.ads}, conduit par ${site.owner}. Les courses sont facturées au tarif préfectoral du département du Nord.` },
+  { q: "Quels moyens de paiement acceptez-vous ?", a: "Espèces et carte bancaire à bord. Une note de taxi détaillée est remise sur demande, pratique pour les notes de frais professionnelles." },
+  { q: "Êtes-vous disponible la nuit et le week-end ?", a: "Oui, 7j/7 et 24h/24. La nuit et le week-end, la réservation à l'avance est conseillée pour garantir votre prise en charge." },
+  { q: "Desservez-vous toute la métropole lilloise ?", a: "Oui. Nous prenons en charge Lille, Loos et l'ensemble de la métropole lilloise (MEL), ainsi que les trajets longue distance (Paris, Belgique, aéroports) sur devis." },
+];
+
+const schema = [
+  localBusinessNode({
+    description,
+    makesOffer: services.map((s) => ({ "@type": "Offer", name: s.t, url: `${site.url}${s.href}` })),
+  }),
+  faqNode(faq),
+];
+---
+
+<Base title={title} description={description} path="/" schema={schema}>
+  <!-- HERO -->
+  <section class="relative bg-ink text-white overflow-hidden">
+    <img src="/assets/images/grande-place-lille-noel.webp" alt="Taxi Lille — Grand-Place de Lille illuminée, ASM Taxis" width="1200" height="800" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-30" />
+    <div class="relative z-10 container mx-auto px-4 py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-block bg-taxi text-ink text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">Artisan taxi · ADS Lille n°{site.ads}</span>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-5">
+          Taxi Lille <span class="text-taxi">24h/24</span>, par un artisan licencié
+        </h1>
+        <p class="text-lg text-neutral-200 mb-8 max-w-lg">
+          ASM Taxis vous conduit à Lille et dans toute la métropole : aéroport de Lesquin, gares Lille Flandres et Lille Europe, courses de nuit et longue distance. Un seul interlocuteur, un prix clair, une voiture confortable.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href={site.phoneHref} class="inline-flex items-center justify-center gap-2 bg-taxi hover:bg-taxi-dark text-ink font-bold py-4 px-8 rounded-xl transition-transform hover:-translate-y-0.5">📞 {site.phone}</a>
+          <a href="/reservation-taxi-lille/" class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 font-bold py-4 px-8 rounded-xl transition-colors">Réserver en ligne</a>
+        </div>
+        <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-neutral-300">
+          <li class="flex items-center gap-2"><span class="text-taxi">●</span> Prix au compteur (tarif Nord)</li>
+          <li class="flex items-center gap-2"><span class="text-taxi">●</span> Paiement CB &amp; espèces</li>
+          <li class="flex items-center gap-2"><span class="text-taxi">●</span> Suivi de train &amp; vol</li>
+        </ul>
+      </div>
+      <div class="lg:max-w-md w-full mx-auto">
+        <WhatsAppForm heading="Réserver votre taxi Lille" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES / HUB -->
+  <section class="py-20 bg-cream">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-4">Nos prestations de taxi à Lille</h2>
+      <p class="text-center text-neutral-600 max-w-2xl mx-auto mb-12">Chaque besoin a sa solution : choisissez la prestation adaptée à votre trajet.</p>
+      <div class="grid md:grid-cols-3 gap-6">
+        {services.map((s) => (
+          <a href={s.href} class="block bg-white p-7 rounded-2xl shadow-sm border border-neutral-100 hover:border-taxi hover:shadow-md transition-all">
+            <h3 class="text-lg font-bold mb-2">{s.t}</h3>
+            <p class="text-sm text-neutral-600 mb-4">{s.d}</p>
+            <span class="text-ink font-bold text-sm group-hover:text-taxi">En savoir plus →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TEXTE SEO -->
+  <section class="py-16 bg-white border-t border-neutral-100">
+    <div class="container mx-auto px-4 max-w-3xl prose-custom">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Votre taxi à Lille, simple et fiable</h2>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        Besoin d'un <strong>taxi à Lille</strong> ? ASM Taxis est un service de taxi artisanal conduit par {site.owner}, titulaire de l'<strong>ADS Lille n°{site.ads}</strong>. Pas d'application à installer, pas d'intermédiaire : vous appelez ou écrivez sur WhatsApp, et vous parlez directement au chauffeur qui viendra vous prendre en charge.
+      </p>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        Nous assurons vos déplacements dans Lille et la métropole lilloise : centre-ville, Vieux-Lille, Euralille, mais aussi <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-aeroport-lille/">l'aéroport de Lille-Lesquin</a>, les <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-gare-lille-flandres/">gares Lille Flandres</a> et <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-gare-lille-europe/">Lille Europe</a>. Pour les sorties tardives ou les vols matinaux, notre <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-nuit/">service de taxi de nuit</a> fonctionne 7j/7.
+      </p>
+      <p class="text-neutral-700 leading-relaxed">
+        Les courses sont facturées au tarif préfectoral du Nord, affiché au compteur. Pour les longues distances, nous établissons un <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-pas-cher/">devis clair à l'avance</a>. Carte bancaire et espèces acceptées, note de taxi remise sur demande.
+      </p>
+    </div>
+  </section>
+
+  <!-- FLOTTE -->
+  <section class="py-16 bg-cream border-t border-neutral-100">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-extrabold text-center mb-3">Notre flotte</h2>
+      <p class="text-center text-neutral-600 max-w-2xl mx-auto mb-10">Véhicules premium et hybrides, propres, confortables et adaptés aux groupes comme aux trajets longue distance.</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+        {flotte.map((v) => (
+          <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-neutral-100">
+            <img src={`/assets/images/flotte-${v.img}.webp`} alt={`Taxi Lille — ${v.name}, flotte ASM Taxis`} width="400" height="260" loading="lazy" decoding="async" class="w-full h-32 object-cover" />
+            <div class="p-3 text-center">
+              <p class="font-bold text-sm">{v.name}</p>
+              <p class="text-xs text-neutral-500">{v.note}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BANDE CONFIANCE -->
+  <section class="py-14 bg-ink text-white">
+    <div class="container mx-auto px-4 grid md:grid-cols-3 gap-8 text-center">
+      <div>
+        <p class="text-4xl font-extrabold text-taxi mb-1">ADS n°{site.ads}</p>
+        <p class="text-neutral-300 text-sm">Artisan taxi officiel, autorisation de stationnement Lille</p>
+      </div>
+      <div>
+        <p class="text-4xl font-extrabold text-taxi mb-1">24/7</p>
+        <p class="text-neutral-300 text-sm">Disponible jour et nuit, week-ends et jours fériés</p>
+      </div>
+      <div>
+        <p class="text-4xl font-extrabold text-taxi mb-1">MEL</p>
+        <p class="text-neutral-300 text-sm">Lille, Loos et toute la métropole · longue distance sur devis</p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Taxi Lille : vos questions" />
+
+  <section class="py-16 bg-cream">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <div class="border-2 border-ink rounded-2xl p-2"><div class="checker rounded-xl p-1"><div class="bg-ink rounded-lg">
+        <div class="p-8 text-center text-white">
+          <h2 class="text-2xl md:text-3xl font-extrabold mb-4">Prêt à partir ? Appelez ASM Taxis</h2>
+          <a href={site.phoneHref} class="inline-flex items-center gap-2 bg-taxi hover:bg-taxi-dark text-ink font-bold py-4 px-10 rounded-xl text-lg transition-transform hover:-translate-y-0.5">📞 {site.phone}</a>
+        </div>
+      </div></div></div>
+    </div>
+  </section>
+</Base>

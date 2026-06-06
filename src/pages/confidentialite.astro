@@ -1,0 +1,23 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, breadcrumbNode } from "../data/site";
+const path = "/confidentialite/";
+const title = "Politique de confidentialité | ASM Taxis Lille";
+const description = "Politique de confidentialité d'ASM Taxis : données collectées lors d'une réservation de taxi, finalités, conservation et droits RGPD.";
+const schema = [breadcrumbNode([{ name: "Accueil", path: "/" }, { name: "Confidentialité", path }])];
+---
+<Base title={title} description={description} path={path} schema={schema}>
+  <section class="py-14 bg-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-8">Politique de confidentialité</h1>
+      <div class="space-y-6 text-neutral-700 leading-relaxed">
+        <div><h2 class="text-xl font-bold mb-2">Responsable du traitement</h2><p>{site.legalName}, ADS Lille n°{site.ads}. Contact : <a class="underline hover:text-taxi" href={`mailto:${site.email}`}>{site.email}</a>.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">Données collectées</h2><p>Lors d'une réservation : nom, numéro de téléphone, lieu de départ et destination, date/heure et nombre de passagers. Ces données sont communiquées volontairement par le client pour permettre la prestation.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">Finalités</h2><p>Les données servent uniquement à organiser et réaliser la course, à vous recontacter au sujet de votre réservation, et à respecter nos obligations légales. Le formulaire de réservation génère un message WhatsApp envoyé depuis votre appareil ; il ne stocke pas vos données sur le site.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">Mesure d'audience</h2><p>Avec votre consentement, nous utilisons Google Tag Manager / Google Analytics pour mesurer la fréquentation du site. Aucun traceur n'est déposé sans votre accord (voir la <a class="underline hover:text-taxi" href="/politique-cookies/">politique de cookies</a>).</p></div>
+        <div><h2 class="text-xl font-bold mb-2">Conservation</h2><p>Les informations de réservation sont conservées le temps nécessaire à la réalisation de la course et au respect des obligations comptables et légales applicables.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">Vos droits</h2><p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de limitation. Pour les exercer, écrivez à <a class="underline hover:text-taxi" href={`mailto:${site.email}`}>{site.email}</a>. Vous pouvez également saisir la CNIL (www.cnil.fr).</p></div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,63 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Faq from "../components/Faq.astro";
+import CallCta from "../components/CallCta.astro";
+import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
+
+const path = "/taxi-gare-lille-europe/";
+const title = "Taxi Gare Lille Europe | Eurostar & Euralille — ASM Taxis";
+const description =
+  "Taxi gare Lille Europe avec ASM Taxis : accueil Eurostar et TGV internationaux, dépose Euralille. Suivi du train, artisan ADS n°180. Réservation au 06 42 98 85 78.";
+
+const faq = [
+  { q: "Le taxi attend-il à la sortie Eurostar de Lille Europe ?", a: "Oui. Indiquez votre numéro de train Eurostar ou TGV : nous suivons l'horaire d'arrivée et vous accueillons à la sortie, dans le hall d'Euralille, avec aide aux bagages." },
+  { q: "Quelle est la différence avec la gare Lille Flandres ?", a: `Lille Europe accueille l'Eurostar (Londres, Bruxelles) et les TGV internationaux, tandis que <a class="text-ink font-bold underline" href="/taxi-gare-lille-flandres/">Lille Flandres</a> reçoit surtout les TGV intérieurs et TER. Les deux gares sont voisines (400 m) et nous desservons les deux.` },
+  { q: "Puis-je réserver un van pour un groupe arrivant en Eurostar ?", a: "Oui, nous disposons d'un Mercedes Classe V pour les groupes de 4 personnes et plus avec bagages. Précisez le nombre de passagers à la réservation." },
+  { q: "Desservez-vous le quartier d'affaires Euralille ?", a: "Bien sûr. Lille Europe est au cœur d'Euralille : nous déposons et récupérons devant les tours, le centre commercial, Lille Grand Palais et les hôtels du quartier." },
+  { q: "Le service fonctionne-t-il pour les Eurostar tôt le matin ou tard le soir ?", a: `Oui, 24h/24. Pour les premiers et derniers Eurostar, réservez à l'avance au ${site.phone} afin de garantir votre prise en charge.` },
+];
+
+const schema = [
+  localBusinessNode({ areaServed: { "@type": "TrainStation", name: "Gare de Lille-Europe" } }),
+  breadcrumbNode([{ name: "Accueil", path: "/" }, { name: "Taxi gare Lille Europe", path }]),
+  faqNode(faq),
+];
+---
+
+<Base title={title} description={description} path={path} ogImage="/assets/images/bourse-lille.webp" schema={schema}>
+  <PageHero
+    eyebrow="Gare Lille Europe · Euralille"
+    h1="Taxi gare Lille Europe"
+    intro="Accueil à l'arrivée de votre Eurostar ou TGV international, dépose et prise en charge dans tout le quartier Euralille. ASM Taxis suit votre train et vous attend."
+    image="/assets/images/bourse-lille.webp"
+    imageAlt="Taxi gare Lille Europe et Euralille — ASM Taxis"
+    lcp={true}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Taxi à la gare Lille Europe, porte de l'international</h2>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        La gare <strong>Lille Europe</strong> est le point d'entrée des voyageurs <strong>Eurostar</strong> (Londres, Bruxelles) et des TGV internationaux, en plein cœur du quartier d'affaires Euralille. Après un long trajet, ASM Taxis vous évite la recherche d'un taxi : votre chauffeur vous attend à la sortie, prêt à charger vos bagages.
+      </p>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        {site.owner}, artisan <strong>ADS Lille n°{site.ads}</strong>, assure vos transferts depuis Lille Europe vers le centre-ville, le Vieux-Lille, votre hôtel, l'<a class="text-ink font-bold underline hover:text-taxi" href="/taxi-aeroport-lille/">aéroport de Lesquin</a> ou toute commune de la métropole. Pour les groupes, un van Mercedes Classe V est disponible sur réservation.
+      </p>
+      <div class="bg-cream border-l-4 border-taxi p-5 rounded-r-xl mt-6">
+        <p class="text-sm text-neutral-700">
+          <strong>Astuce voyageur :</strong> si votre billet indique « Lille Flandres », c'est l'autre gare, à 400 m. Voir
+          <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-gare-lille-flandres/">taxi gare Lille Flandres</a>. En cas de doute, indiquez-nous votre n° de train.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Taxi gare Lille Europe : questions fréquentes" />
+
+  <section class="py-16 bg-cream">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <CallCta label="Réservez votre taxi gare Lille Europe" sub="Eurostar ou TGV : donnez votre n° de train, nous vous accueillons à la sortie." />
+    </div>
+  </section>
+</Base>

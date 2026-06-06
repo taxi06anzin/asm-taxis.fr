@@ -1,0 +1,63 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Faq from "../components/Faq.astro";
+import CallCta from "../components/CallCta.astro";
+import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
+
+const path = "/taxi-gare-lille-flandres/";
+const title = "Taxi Gare Lille Flandres | ASM Taxis 24h/24";
+const description =
+  "Taxi gare Lille Flandres avec ASM Taxis : dépose au plus près des quais, accueil à l'arrivée de votre TGV ou TER. Artisan ADS n°180. Réservation au 06 42 98 85 78.";
+
+const faq = [
+  { q: "Où me prend en charge le taxi à la gare Lille Flandres ?", a: "À la station de taxis officielle, devant le parvis principal de la gare Lille Flandres (place des Buisses). Sur réservation, nous convenons d'un point de rendez-vous précis pour vous repérer facilement." },
+  { q: "Quelle différence entre Lille Flandres et Lille Europe ?", a: `Les deux gares sont distantes d'environ 400 mètres. Lille Flandres accueille surtout les TGV intérieurs et les TER ; <a class="text-ink font-bold underline" href="/taxi-gare-lille-europe/">Lille Europe</a> reçoit l'Eurostar et les TGV internationaux. Nous desservons les deux.` },
+  { q: "Pouvez-vous m'attendre si mon train a du retard ?", a: "Oui. Communiquez votre numéro de train : nous suivons son horaire réel et adaptons l'heure de prise en charge, sans surcoût d'attente injustifié." },
+  { q: "Proposez-vous l'accueil avec pancarte ?", a: "Sur demande, pour les arrivées TGV, nous pouvons vous accueillir à l'intérieur avec une pancarte à votre nom — pratique pour les voyageurs d'affaires et les groupes." },
+  { q: "Le taxi gare Lille Flandres roule-t-il la nuit ?", a: `Oui, 24h/24. Pour les derniers trains ou les départs très matinaux, réservez à l'avance au ${site.phone}.` },
+];
+
+const schema = [
+  localBusinessNode({ areaServed: { "@type": "TrainStation", name: "Gare de Lille-Flandres" } }),
+  breadcrumbNode([{ name: "Accueil", path: "/" }, { name: "Taxi gare Lille Flandres", path }]),
+  faqNode(faq),
+];
+---
+
+<Base title={title} description={description} path={path} ogImage="/assets/images/gare-lille-flandres.webp" schema={schema}>
+  <PageHero
+    eyebrow="Gare Lille Flandres"
+    h1="Taxi gare Lille Flandres"
+    intro="Dépose au plus près des quais et accueil à l'arrivée de votre TGV ou TER. ASM Taxis vous attend à la gare Lille Flandres, 24h/24, avec suivi de votre train."
+    image="/assets/images/gare-lille-flandres.webp"
+    imageAlt="Taxi gare Lille Flandres — ASM Taxis"
+    lcp={true}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Votre taxi à la gare Lille Flandres</h2>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        Première gare du centre de Lille, <strong>Lille Flandres</strong> voit passer chaque jour des milliers de voyageurs en TGV et TER. À l'arrivée, trouver un taxi rapidement n'est pas toujours évident aux heures de pointe. Avec ASM Taxis, vous réservez à l'avance : votre chauffeur vous attend, vous montez, vous partez.
+      </p>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        {site.owner}, artisan taxi <strong>ADS Lille n°{site.ads}</strong>, assure vos transferts depuis la gare vers votre domicile, votre hôtel, une entreprise, l'<a class="text-ink font-bold underline hover:text-taxi" href="/taxi-aeroport-lille/">aéroport de Lesquin</a> ou n'importe quelle commune de la métropole. Course au compteur, paiement carte ou espèces, reçu sur demande.
+      </p>
+      <div class="bg-cream border-l-4 border-taxi p-5 rounded-r-xl mt-6">
+        <p class="text-sm text-neutral-700">
+          <strong>Bon à savoir :</strong> la gare Lille Europe n'est qu'à 400 m. Si vous arrivez en Eurostar ou en TGV international, consultez notre page dédiée
+          <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-gare-lille-europe/">taxi gare Lille Europe</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Taxi gare Lille Flandres : questions fréquentes" />
+
+  <section class="py-16 bg-cream">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <CallCta label="Réservez votre taxi gare Lille Flandres" sub="Donnez votre n° de train, nous suivons son horaire et vous attendons." />
+    </div>
+  </section>
+</Base>

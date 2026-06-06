@@ -1,0 +1,69 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Faq from "../components/Faq.astro";
+import CallCta from "../components/CallCta.astro";
+import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
+
+const path = "/taxi-lille-nuit/";
+const title = "Taxi Lille Nuit | Course de Nuit 24h/24 — ASM Taxis";
+const description =
+  "Taxi de nuit à Lille avec ASM Taxis : sorties, vols matinaux, gardes, urgences. Service 7j/7 24h/24, artisan ADS n°180. Réservez votre course de nuit au 06 42 98 85 78.";
+
+const faq = [
+  { q: "Jusqu'à quelle heure roulez-vous la nuit ?", a: "Sans interruption : ASM Taxis fonctionne 24h/24, toute la nuit, y compris les week-ends et jours fériés. Il n'y a pas d'heure de fermeture." },
+  { q: "Le tarif de nuit est-il plus élevé ?", a: "La nuit (généralement de 19h à 7h), le dimanche et les jours fériés, le tarif appliqué au compteur est le tarif majoré prévu par l'arrêté préfectoral du Nord. Il s'agit du tarif officiel, le même pour tous les taxis." },
+  { q: "Faut-il réserver à l'avance pour une course de nuit ?", a: `C'est fortement conseillé. La nuit, la demande est forte (sorties, vols tôt le matin) : en réservant au ${site.phone}, vous garantissez votre prise en charge à l'heure voulue.` },
+  { q: "Assurez-vous les sorties et retours de soirée en sécurité ?", a: "Oui. Que ce soit après un restaurant, un concert au Zénith, une soirée dans le Vieux-Lille ou un événement à Lille Grand Palais, nous vous ramenons à bon port en toute sécurité, seul ou en groupe." },
+  { q: "Pouvez-vous me conduire à l'aéroport ou à la gare très tôt le matin ?", a: `Bien sûr. Les départs nocturnes vers <a class="text-ink font-bold underline" href="/taxi-aeroport-lille/">l'aéroport de Lesquin</a> ou les <a class="text-ink font-bold underline" href="/taxi-gare-lille-flandres/">gares de Lille</a> sont une part importante de notre service de nuit. Réservez la veille.` },
+];
+
+const schema = [
+  localBusinessNode({}),
+  breadcrumbNode([{ name: "Accueil", path: "/" }, { name: "Taxi Lille nuit", path }]),
+  faqNode(faq),
+];
+---
+
+<Base title={title} description={description} path={path} ogImage="/assets/images/taxi-lille-rue.webp" schema={schema}>
+  <PageHero
+    eyebrow="Service de nuit"
+    h1="Taxi Lille de nuit, 24h/24"
+    intro="Sorties, vols matinaux, gardes de nuit, urgences : ASM Taxis roule toute la nuit, 7j/7. Un chauffeur licencié vous prend en charge en sécurité, à toute heure."
+    image="/assets/images/taxi-lille-rue.webp"
+    imageAlt="Taxi Lille de nuit — rue de Lille éclairée, ASM Taxis"
+    lcp={true}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Un taxi à Lille, même au cœur de la nuit</h2>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        Quand les transports en commun s'arrêtent, ASM Taxis continue. Notre <strong>taxi de nuit à Lille</strong> répond à tous les besoins nocturnes : retour de soirée dans le Vieux-Lille, sortie au Zénith ou à l'Aéronef, train de nuit, vol au départ de Lesquin à l'aube, garde médicale ou simple imprévu.
+      </p>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        Vous êtes pris en charge par {site.owner}, artisan taxi <strong>ADS Lille n°{site.ads}</strong> — un professionnel identifié, pas un inconnu. Le trajet est facturé au tarif préfectoral de nuit (tarif officiel majoré), affiché au compteur, réglable en carte ou en espèces.
+      </p>
+      <div class="grid sm:grid-cols-3 gap-4 mt-8">
+        {[
+          ["Sorties & soirées", "Restaurants, concerts, bars, événements : retour sûr à domicile."],
+          ["Vols & trains tôt", "Départs nocturnes vers l'aéroport et les gares, réservés la veille."],
+          ["Urgences & gardes", "Déplacements de nuit imprévus, professionnels de santé, gardes."],
+        ].map(([t, d]) => (
+          <div class="bg-cream p-5 rounded-2xl border border-neutral-100">
+            <h3 class="font-bold mb-2">{t}</h3>
+            <p class="text-sm text-neutral-600">{d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Taxi Lille nuit : questions fréquentes" />
+
+  <section class="py-16 bg-cream">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <CallCta label="Besoin d'un taxi cette nuit ?" sub="Appelez maintenant ou réservez votre course de nuit à l'avance." />
+    </div>
+  </section>
+</Base>

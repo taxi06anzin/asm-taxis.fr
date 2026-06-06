@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, breadcrumbNode } from "../data/site";
+const path = "/cgv/";
+const title = "Conditions générales de vente (CGV) | ASM Taxis Lille";
+const description = "Conditions générales de vente des prestations de transport de personnes par taxi d'ASM Taxis à Lille : réservation, tarifs, paiement, annulation.";
+const schema = [breadcrumbNode([{ name: "Accueil", path: "/" }, { name: "CGV", path }])];
+---
+<Base title={title} description={description} path={path} schema={schema}>
+  <section class="py-14 bg-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-8">Conditions générales de vente</h1>
+      <div class="space-y-6 text-neutral-700 leading-relaxed">
+        <div><h2 class="text-xl font-bold mb-2">1. Objet</h2><p>Les présentes CGV régissent les prestations de transport de personnes par taxi assurées par {site.legalName}, artisan titulaire de l'ADS Lille n°{site.ads}.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">2. Réservation</h2><p>La réservation s'effectue par téléphone au {site.phone}, par WhatsApp ou via le formulaire du site. Elle est confirmée par le chauffeur. Le client communique le lieu de prise en charge, la destination, l'heure et le nombre de passagers.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">3. Tarifs</h2><p>Les courses sont facturées au compteur, selon le tarif fixé par l'arrêté préfectoral du Nord en vigueur (prise en charge, tarif kilométrique, tarif horaire d'attente, minimum de perception). Pour les trajets longue distance et aéroports lointains, un forfait peut être convenu à l'avance.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">4. Paiement</h2><p>Le paiement s'effectue à la fin de la course, en espèces ou par carte bancaire. Une note de taxi est remise sur demande.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">5. Annulation</h2><p>Toute annulation doit être signalée au plus tôt. Une course réservée puis annulée tardivement après déplacement du véhicule peut donner lieu à la facturation de l'approche au tarif en vigueur.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">6. Responsabilité</h2><p>Le transporteur s'engage à mettre en œuvre les moyens nécessaires pour respecter les horaires convenus, sous réserve des aléas de circulation et cas de force majeure.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">7. Réclamations &amp; médiation</h2><p>Toute réclamation peut être adressée à <a class="underline hover:text-taxi" href={`mailto:${site.email}`}>{site.email}</a>. Conformément aux articles L.612-1 et suivants du Code de la consommation, après une réclamation écrite restée sans réponse satisfaisante, le client consommateur peut recourir gratuitement à un médiateur de la consommation : <strong>{site.mediator.name}</strong>, {site.mediator.address} — <a class="underline hover:text-taxi" href={site.mediator.url} target="_blank" rel="noopener">{site.mediator.url}</a>.</p></div>
+      </div>
+    </div>
+  </section>
+</Base>

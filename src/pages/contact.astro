@@ -1,0 +1,48 @@
+---
+import Base from "../layouts/Base.astro";
+import WhatsAppForm from "../components/WhatsAppForm.astro";
+import { site, localBusinessNode, breadcrumbNode } from "../data/site";
+
+const path = "/contact/";
+const title = "Contact ASM Taxis Lille | Téléphone & WhatsApp 24h/24";
+const description =
+  "Contactez ASM Taxis à Lille : téléphone 06 42 98 85 78, WhatsApp, e-mail. Artisan taxi ADS n°180 à Loos, métropole lilloise. Disponible 24h/24, 7j/7.";
+
+const schema = [
+  localBusinessNode({}),
+  breadcrumbNode([{ name: "Accueil", path: "/" }, { name: "Contact", path }]),
+];
+---
+
+<Base title={title} description={description} path={path} schema={schema}>
+  <section class="bg-ink text-white py-12">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-3">Contacter ASM Taxis</h1>
+      <p class="text-neutral-300">Un taxi à Lille, 24h/24. Le plus rapide reste l'appel téléphonique.</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="container mx-auto px-4 max-w-5xl grid md:grid-cols-2 gap-10">
+      <div>
+        <h2 class="text-2xl font-extrabold mb-6">Coordonnées</h2>
+        <ul class="space-y-4 text-neutral-700">
+          <li><span class="font-bold">Téléphone :</span> <a href={site.phoneHref} class="text-ink underline hover:text-taxi font-bold">{site.phone}</a></li>
+          <li><span class="font-bold">WhatsApp :</span> <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" class="text-ink underline hover:text-taxi">Écrire un message</a></li>
+          <li><span class="font-bold">E-mail :</span> <a href={`mailto:${site.email}`} class="text-ink underline hover:text-taxi">{site.email}</a></li>
+          <li><span class="font-bold">Exploitant :</span> {site.owner}, artisan taxi</li>
+          <li><span class="font-bold">Autorisation :</span> ADS Lille n°{site.ads}</li>
+          <li><span class="font-bold">Secteur :</span> {site.address.locality} ({site.address.postalCode}) — {site.zone}</li>
+          <li><span class="font-bold">Horaires :</span> 7j/7, 24h/24</li>
+          <li><a href={site.googleProfile} target="_blank" rel="noopener noreferrer" class="text-taxi font-bold hover:underline">Voir notre fiche Google →</a></li>
+        </ul>
+        <div class="mt-8 bg-cream border-l-4 border-taxi p-5 rounded-r-xl">
+          <p class="text-sm text-neutral-700">Pour une prise en charge immédiate, privilégiez l'appel. Le formulaire et WhatsApp conviennent parfaitement aux réservations à l'avance.</p>
+        </div>
+      </div>
+      <div>
+        <WhatsAppForm heading="Envoyer une demande" />
+      </div>
+    </div>
+  </section>
+</Base>

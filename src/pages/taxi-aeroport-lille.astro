@@ -1,0 +1,79 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Faq from "../components/Faq.astro";
+import CallCta from "../components/CallCta.astro";
+import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
+
+const path = "/taxi-aeroport-lille/";
+const title = "Taxi Aéroport Lille-Lesquin | Transfert ASM Taxis";
+const description =
+  "Taxi aéroport Lille-Lesquin avec ASM Taxis : transfert porte-à-porte, suivi de vol, prix annoncé à l'avance. Aussi Charleroi et Bruxelles. Réservez au 06 42 98 85 78.";
+
+const faq = [
+  { q: "Combien de temps pour rejoindre l'aéroport de Lille-Lesquin depuis le centre de Lille ?", a: "Comptez environ 20 à 30 minutes selon le trafic et le point de départ. Nous vous conseillons de prévoir une marge confortable et nous adaptons l'heure de prise en charge à votre vol." },
+  { q: "Suivez-vous l'horaire réel de mon vol ?", a: "Oui. Communiquez-nous votre numéro de vol : nous surveillons les éventuels retards ou avances pour ajuster l'heure d'arrivée et éviter toute attente inutile." },
+  { q: "Proposez-vous aussi les aéroports de Charleroi et Bruxelles ?", a: "Oui, ASM Taxis assure les transferts vers Charleroi (BSCA) et Bruxelles-Zaventem depuis Lille et la métropole, sur devis forfaitaire établi à l'avance." },
+  { q: "Le prix du transfert aéroport est-il connu à l'avance ?", a: `Pour Lesquin, la course est au compteur (tarif préfectoral du Nord) ; pour Charleroi et Bruxelles, nous fixons un forfait clair avant le départ. Appelez le ${site.phone} pour une estimation.` },
+  { q: "Puis-je réserver un taxi pour un vol très tôt le matin ?", a: "Bien sûr, nous roulons 24h/24. Pour les départs nocturnes ou très matinaux, réservez la veille afin de garantir votre prise en charge à l'heure." },
+];
+
+const schema = [
+  localBusinessNode({ areaServed: { "@type": "Airport", name: "Aéroport de Lille-Lesquin", iataCode: "LIL" } }),
+  breadcrumbNode([{ name: "Accueil", path: "/" }, { name: "Taxi aéroport Lille", path }]),
+  faqNode(faq),
+];
+---
+
+<Base title={title} description={description} path={path} ogImage="/assets/images/taxi-aeroport-lille.webp" schema={schema}>
+  <PageHero
+    eyebrow="Transfert aéroport"
+    h1="Taxi aéroport Lille-Lesquin"
+    intro="Transfert porte-à-porte vers et depuis l'aéroport de Lille-Lesquin, avec suivi de votre vol et prise en charge des bagages. ASM Taxis vous évite stress et correspondances."
+    image="/assets/images/taxi-aeroport-lille.webp"
+    imageAlt="Taxi aéroport Lille-Lesquin — transfert ASM Taxis"
+    lcp={true}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Un transfert aéroport sans mauvaise surprise</h2>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        Prendre un <strong>taxi pour l'aéroport de Lille-Lesquin</strong> doit être la partie la plus simple de votre voyage. ASM Taxis vient vous chercher à l'adresse de votre choix — domicile, hôtel, entreprise — et vous dépose directement au terminal, bagages portés. Au retour, nous vous attendons à la sortie, même en cas de retard de vol.
+      </p>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        Conduit par {site.owner}, artisan titulaire de l'<strong>ADS Lille n°{site.ads}</strong>, le service est ponctuel et transparent : course au compteur pour Lesquin (tarif préfectoral du Nord), forfait annoncé à l'avance pour les aéroports plus lointains. Vous savez à quoi vous attendre avant de monter à bord.
+      </p>
+      <h3 class="text-xl font-bold mt-8 mb-3">Aéroports desservis depuis Lille</h3>
+      <ul class="space-y-2 text-neutral-700">
+        <li>✈️ <strong>Lille-Lesquin (LIL)</strong> — au compteur, 20 à 30 min depuis le centre.</li>
+        <li>✈️ <strong>Charleroi / Brussels South (CRL)</strong> — forfait, idéal pour les vols low-cost.</li>
+        <li>✈️ <strong>Bruxelles-Zaventem (BRU)</strong> — forfait, berline ou van pour les groupes.</li>
+        <li>✈️ <strong>Paris CDG &amp; Orly</strong> — longue distance sur devis, véhicule confort.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-12 bg-cream">
+    <div class="container mx-auto px-4 max-w-4xl grid md:grid-cols-3 gap-6">
+      {[
+        ["Suivi de vol", "Donnez votre n° de vol : nous ajustons l'heure en cas de retard ou d'avance."],
+        ["Bagages inclus", "Aide au chargement, coffre adapté, sièges enfant sur demande."],
+        ["Reçu pro", "Note de taxi détaillée pour vos notes de frais et déplacements d'affaires."],
+      ].map(([t, d]) => (
+        <div class="bg-white p-6 rounded-2xl border border-neutral-100 shadow-sm">
+          <h3 class="font-bold mb-2">{t}</h3>
+          <p class="text-sm text-neutral-600">{d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <Faq items={faq} title="Taxi aéroport Lille : questions fréquentes" />
+
+  <section class="py-16 bg-cream">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <CallCta label="Réservez votre transfert aéroport" sub="Indiquez votre vol et votre adresse, nous nous occupons du reste." />
+    </div>
+  </section>
+</Base>

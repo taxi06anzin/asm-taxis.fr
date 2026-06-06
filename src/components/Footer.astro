@@ -1,0 +1,61 @@
+---
+import { site, navLinks } from "../data/site";
+const year = 2026;
+---
+
+<footer class="bg-ink text-neutral-300 pt-14 pb-8 mt-20 border-t-4 border-taxi">
+  <div class="container mx-auto px-4 grid md:grid-cols-4 gap-10">
+    <div>
+      <h2 class="text-white text-xl font-extrabold mb-3">ASM Taxis</h2>
+      <p class="text-sm leading-relaxed mb-4">
+        Taxi à Lille et dans la métropole, 24h/24. Artisan taxi licencié,
+        <strong class="text-taxi">ADS Lille n°{site.ads}</strong> — {site.owner}.
+        Gares, aéroport, trajets longue distance et courses de nuit.
+      </p>
+      <a href={site.phoneHref} class="text-white font-bold text-lg hover:text-taxi transition-colors">📞 {site.phone}</a>
+      <p class="mt-3 text-sm">
+        <a href={site.googleProfile} target="_blank" rel="noopener noreferrer" class="text-taxi hover:underline">Voir notre fiche Google →</a>
+      </p>
+      <p class="mt-2 text-sm">
+        <a href={`mailto:${site.email}`} class="hover:text-taxi transition-colors">{site.email}</a>
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-white text-lg font-bold mb-3">Nos services</h2>
+      <ul class="space-y-2 text-sm">
+        {navLinks.filter((l) => l.href !== "/" && l.href !== "/contact/").map((l) => (
+          <li><a href={l.href} class="hover:text-taxi transition-colors">{l.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-white text-lg font-bold mb-3">Zone desservie</h2>
+      <p class="text-sm leading-relaxed">
+        {site.zone}. Départ et prise en charge sur Lille, Loos et communes voisines.
+        Réservation conseillée la nuit et le week-end.
+      </p>
+      <div class="mt-4 text-sm bg-white/5 border border-white/10 rounded-lg p-3">
+        <p class="font-bold text-taxi mb-1">Horaires</p>
+        <p>7j/7, 24h/24</p>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="text-white text-lg font-bold mb-3">Informations</h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/contact/" class="hover:text-taxi transition-colors">Contact &amp; réservation</a></li>
+        <li><a href="/mentions-legales/" class="hover:text-taxi transition-colors">Mentions légales</a></li>
+        <li><a href="/cgv/" class="hover:text-taxi transition-colors">CGV</a></li>
+        <li><a href="/confidentialite/" class="hover:text-taxi transition-colors">Confidentialité</a></li>
+        <li><a href="/politique-cookies/" class="hover:text-taxi transition-colors">Politique de cookies</a></li>
+        <li><a href="/sitemap-index.xml" class="hover:text-taxi transition-colors">Plan du site</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 mt-10 pt-6 border-t border-white/10 text-center text-xs text-neutral-400">
+    <p>&copy; {year} ASM Taxis — {site.owner}, artisan taxi ADS Lille n°{site.ads}. Tous droits réservés.</p>
+  </div>
+</footer>

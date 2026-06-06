@@ -1,0 +1,61 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, breadcrumbNode } from "../data/site";
+const path = "/mentions-legales/";
+const title = "Mentions légales | ASM Taxis Lille";
+const description = "Mentions légales du site asm-taxis.fr — éditeur ASM TAXI (SASU), RCS Lille Métropole 800 320 517, ADS Lille n°180, hébergeur OVH.";
+const schema = [breadcrumbNode([{ name: "Accueil", path: "/" }, { name: "Mentions légales", path }])];
+---
+<Base title={title} description={description} path={path} schema={schema}>
+  <section class="py-14 bg-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-8">Mentions légales</h1>
+      <div class="space-y-8 text-neutral-700 leading-relaxed">
+
+        <div>
+          <h2 class="text-xl font-bold mb-2">1. Éditeur du site</h2>
+          <p>Le site asm-taxis.fr est édité par la société :</p>
+          <ul class="mt-2 space-y-1">
+            <li><strong>Raison sociale :</strong> {site.legalName}</li>
+            <li><strong>Forme juridique :</strong> {site.legalForm}</li>
+            <li><strong>Capital social :</strong> {site.capital}</li>
+            <li><strong>Siège social :</strong> {site.address.street}, {site.address.postalCode} {site.address.locality.toUpperCase()}</li>
+            <li><strong>RCS :</strong> {site.rcs}</li>
+            <li><strong>Autorisation de stationnement :</strong> n°{site.ads} de Lille (TAXI {site.ads} Lille)</li>
+            <li><strong>Président / Directeur de la publication :</strong> M. {site.owner}</li>
+            <li><strong>TVA intracommunautaire :</strong> {site.tva}</li>
+          </ul>
+          <p class="mt-2">La société est représentée par M. {site.owner}, agissant et ayant les pouvoirs nécessaires en tant que président.</p>
+          <p class="mt-2"><strong>Contact :</strong> <a class="underline hover:text-taxi" href={site.phoneHref}>{site.phone}</a> — <a class="underline hover:text-taxi" href={`mailto:${site.email}`}>{site.email}</a> — site asm-taxis.fr</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold mb-2">2. Hébergement</h2>
+          <p>Le site est hébergé par :</p>
+          <p class="mt-2"><strong>{site.host.name}</strong><br />{site.host.address}<br />Site web : <a class="underline hover:text-taxi" href={site.host.url} target="_blank" rel="noopener">{site.host.url}</a></p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold mb-2">3. Propriété intellectuelle</h2>
+          <p>L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés, y compris pour les documents téléchargeables et les représentations iconographiques et photographiques. La reproduction de tout ou partie de ce site sur un support électronique quel qu'il soit est formellement interdite sauf autorisation expresse du directeur de la publication.</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold mb-2">4. Responsabilité</h2>
+          <p>Les informations fournies sur le site asm-taxis.fr le sont à titre informatif. ASM TAXI ne saurait garantir l'exactitude, la complétude et l'actualité des informations diffusées sur le site. En conséquence, l'utilisateur reconnaît utiliser ces informations sous sa responsabilité exclusive. Le site peut contenir des liens vers d'autres sites web ; ASM TAXI n'est pas responsable du contenu de ces sites tiers.</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold mb-2">5. Droit applicable</h2>
+          <p>Les présentes mentions légales sont régies par le droit français. En cas de litige, et à défaut d'accord amiable, les tribunaux français seront seuls compétents.</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold mb-2">6. Données personnelles &amp; cookies</h2>
+          <p>Voir notre <a class="underline hover:text-taxi" href="/confidentialite/">politique de confidentialité</a> et notre <a class="underline hover:text-taxi" href="/politique-cookies/">politique de cookies</a>.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,40 @@
+---
+import { site } from "../data/site";
+interface Props {
+  h1: string;
+  intro: string;
+  image: string;
+  imageAlt: string;
+  eyebrow?: string;
+  lcp?: boolean;
+}
+const { h1, intro, image, imageAlt, eyebrow, lcp = false } = Astro.props;
+---
+<section class="relative bg-ink text-white overflow-hidden">
+  <img
+    src={image}
+    alt={imageAlt}
+    width="1200"
+    height="800"
+    fetchpriority={lcp ? "high" : undefined}
+    loading={lcp ? "eager" : "lazy"}
+    decoding="async"
+    class="absolute inset-0 w-full h-full object-cover opacity-30"
+  />
+  <div class="relative z-10 container mx-auto px-4 py-20 md:py-28 max-w-3xl">
+    {eyebrow && (
+      <span class="inline-block bg-taxi text-ink text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">{eyebrow}</span>
+    )}
+    <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-5">{h1}</h1>
+    <p class="text-lg text-neutral-200 mb-8 max-w-2xl">{intro}</p>
+    <div class="flex flex-col sm:flex-row gap-3">
+      <a href={site.phoneHref} class="inline-flex items-center justify-center gap-2 bg-taxi hover:bg-taxi-dark text-ink font-bold py-4 px-8 rounded-xl transition-transform hover:-translate-y-0.5">
+        📞 {site.phone}
+      </a>
+      <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold py-4 px-8 rounded-xl transition-colors">
+        Réserver par WhatsApp
+      </a>
+    </div>
+    <p class="text-sm text-neutral-300 mt-4">Artisan licencié · ADS Lille n°{site.ads} · Réservation 24h/24</p>
+  </div>
+</section>

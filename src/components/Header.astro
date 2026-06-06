@@ -1,0 +1,76 @@
+---
+import { site, navLinks } from "../data/site";
+const current = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-ink text-white shadow-lg">
+  <!-- liseré damier taxi -->
+  <div class="checker h-1.5 w-full"></div>
+  <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+    <a href="/" class="flex items-center gap-2" aria-label="ASM Taxis — accueil">
+      <img
+        src="/assets/images/logo-asm-taxis.webp"
+        alt="ASM Taxis — taxi Lille, ADS n°180"
+        width="120"
+        height="40"
+        class="h-10 w-auto"
+      />
+    </a>
+
+    <button
+      id="menu-toggle"
+      class="md:hidden text-taxi focus:outline-none focus:ring-2 focus:ring-taxi rounded"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+    </button>
+
+    <nav class="hidden md:block" aria-label="Navigation principale">
+      <ul class="flex flex-wrap gap-x-5 gap-y-1 font-medium text-sm">
+        {navLinks.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              class:list={["hover:text-taxi transition-colors", current === l.href && "text-taxi font-bold"]}
+              aria-current={current === l.href ? "page" : undefined}
+            >{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a
+      href={site.phoneHref}
+      class="hidden md:inline-flex items-center gap-2 bg-taxi hover:bg-taxi-dark text-ink px-4 py-2 rounded-full font-bold transition-colors"
+    >📞 {site.phone}</a>
+
+    <nav id="mobile-menu" class="hidden w-full md:hidden bg-ink-soft rounded-lg p-4" aria-label="Menu mobile">
+      <ul class="flex flex-col gap-1 font-medium">
+        {navLinks.map((l) => (
+          <li>
+            <a href={l.href} class:list={["block py-2 px-2 rounded hover:bg-asphalt hover:text-taxi transition-colors", current === l.href && "text-taxi"]}>{l.label}</a>
+          </li>
+        ))}
+        <li class="pt-2">
+          <a href={site.phoneHref} class="block text-center bg-taxi text-ink px-4 py-3 rounded-lg font-bold">📞 Appeler {site.phone}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    const t = document.getElementById("menu-toggle");
+    const m = document.getElementById("mobile-menu");
+    if (t && m) {
+      t.addEventListener("click", function () {
+        m.classList.toggle("hidden");
+        t.setAttribute("aria-expanded", m.classList.contains("hidden") ? "false" : "true");
+      });
+    }
+  })();
+</script>

@@ -1,0 +1,85 @@
+---
+import Base from "../layouts/Base.astro";
+import WhatsAppForm from "../components/WhatsAppForm.astro";
+import Faq from "../components/Faq.astro";
+import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
+
+const path = "/reservation-taxi-lille/";
+const title = "Réservation Taxi Lille 24h/24 | ASM Taxis";
+const description =
+  "Réservation taxi Lille en 1 minute : par téléphone au 06 42 98 85 78 ou via WhatsApp. Artisan ADS n°180, confirmation immédiate, 24h/24. Aéroport, gares, nuit, longue distance.";
+
+const faq = [
+  { q: "Comment réserver un taxi à Lille ?", a: `Trois options : appeler le ${site.phone}, remplir le formulaire ci-dessus (envoyé sur WhatsApp), ou écrire directement sur WhatsApp. Vous parlez au chauffeur, la confirmation est immédiate.` },
+  { q: "Puis-je réserver à l'avance pour une date précise ?", a: "Oui. Vous pouvez réserver pour le jour même comme pour les jours suivants : déplacement professionnel, train, vol, rendez-vous médical. Indiquez la date et l'heure souhaitées." },
+  { q: "La réservation est-elle payante ou engageante ?", a: "Non. La réservation est gratuite et sans frais. Vous ne payez que la course réalisée, au tarif officiel affiché au compteur ou au forfait convenu." },
+  { q: "Recevrai-je une confirmation ?", a: "Oui, par téléphone ou par message WhatsApp, avec l'heure de prise en charge. En cas d'imprévu, vous pouvez nous joindre directement pour ajuster." },
+  { q: "Puis-je réserver pour quelqu'un d'autre ?", a: "Bien sûr — un proche, un client, un patient. Donnez-nous le lieu de prise en charge, la destination et un numéro de contact pour la personne transportée." },
+];
+
+const schema = [
+  localBusinessNode({
+    potentialAction: {
+      "@type": "ReserveAction",
+      target: [
+        { "@type": "EntryPoint", urlTemplate: site.phoneHref, inLanguage: "fr" },
+        { "@type": "EntryPoint", urlTemplate: `https://wa.me/${site.whatsapp}`, inLanguage: "fr" },
+      ],
+      result: { "@type": "Reservation", name: "Réservation de taxi à Lille" },
+    },
+  }),
+  breadcrumbNode([{ name: "Accueil", path: "/" }, { name: "Réservation taxi Lille", path }]),
+  faqNode(faq),
+];
+---
+
+<Base title={title} description={description} path={path} schema={schema}>
+  <section class="bg-ink text-white py-14">
+    <div class="container mx-auto px-4 max-w-5xl grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <span class="inline-block bg-taxi text-ink text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">Réservation 24h/24</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-5">Réservation taxi Lille en 1 minute</h1>
+        <p class="text-lg text-neutral-200 mb-6">
+          Réservez votre taxi à Lille par téléphone ou WhatsApp, pour maintenant ou pour plus tard. Confirmation immédiate avec {site.owner}, artisan licencié ADS n°{site.ads}.
+        </p>
+        <div class="space-y-3">
+          <a href={site.phoneHref} class="flex items-center gap-3 bg-taxi text-ink font-bold py-4 px-6 rounded-xl hover:bg-taxi-dark transition-colors">
+            <span class="text-2xl">📞</span><span>Appeler le {site.phone}</span>
+          </a>
+          <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" class="flex items-center gap-3 bg-[#128C47] hover:bg-[#0d7a3a] text-white font-bold py-4 px-6 rounded-xl transition-colors">
+            <span class="text-2xl">💬</span><span>Écrire sur WhatsApp</span>
+          </a>
+        </div>
+      </div>
+      <div>
+        <WhatsAppForm heading="Demande de réservation" />
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Comment ça marche</h2>
+      <ol class="space-y-5">
+        {[
+          ["Vous nous contactez", "Téléphone, WhatsApp ou formulaire. Précisez départ, destination, heure et nombre de passagers."],
+          ["Nous confirmons", "Confirmation immédiate de la prise en charge et, si besoin, du forfait pour les longues distances."],
+          ["Le chauffeur arrive", "Votre taxi se présente à l'heure et au lieu convenus. Paiement carte ou espèces, reçu sur demande."],
+        ].map(([t, d], i) => (
+          <li class="flex gap-4">
+            <span class="shrink-0 w-10 h-10 rounded-full bg-taxi text-ink font-extrabold flex items-center justify-center">{i + 1}</span>
+            <div><h3 class="font-bold">{t}</h3><p class="text-neutral-600 text-sm">{d}</p></div>
+          </li>
+        ))}
+      </ol>
+      <p class="mt-8 text-neutral-700">
+        Pour préparer votre trajet, consultez aussi nos pages
+        <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-aeroport-lille/">taxi aéroport</a>,
+        <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-gare-lille-europe/">gare Lille Europe</a> et
+        <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-nuit/">taxi de nuit</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Réservation : questions fréquentes" />
+</Base>

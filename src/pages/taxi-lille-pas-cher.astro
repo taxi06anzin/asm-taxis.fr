@@ -1,0 +1,89 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Faq from "../components/Faq.astro";
+import CallCta from "../components/CallCta.astro";
+import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
+
+const path = "/taxi-lille-pas-cher/";
+const title = "Taxi Lille Pas Cher | Tarifs Clairs & Devis — ASM Taxis";
+const description =
+  "Taxi Lille pas cher avec ASM Taxis : tarif officiel au compteur, sans majoration cachée ni surge. Forfaits aéroport/gare et devis gratuit. Estimez votre course au 06 42 98 85 78.";
+
+const tarifs = [
+  ["Prise en charge", "2,80 €", "Montant de départ au compteur"],
+  ["Course minimum", "8,00 €", "Minimum légal de perception (toute course)"],
+  ["Tarif kilométrique", "selon arrêté préfectoral Nord", "Tarifs A/B/C/D (jour, nuit, dimanche, retour à vide)"],
+  ["Attente / circulation lente", "tarif horaire officiel", "Appliqué en cas d'arrêt ou de trafic"],
+  ["Forfait aéroport / longue distance", "sur devis", "Prix fixe annoncé avant le départ"],
+];
+
+const faq = [
+  { q: "Pourquoi parler de taxi « pas cher » si les tarifs sont réglementés ?", a: "Les tarifs d'un taxi sont fixés par arrêté préfectoral : ils sont les mêmes pour tous les artisans. « Pas cher » avec ASM Taxis signifie : aucun supplément abusif, pas de tarification dynamique (surge), un compteur honnête et un forfait clair annoncé à l'avance pour les longs trajets." },
+  { q: "Puis-je connaître le prix de ma course avant de partir ?", a: `Oui. Pour un trajet local, nous vous donnons une estimation au téléphone ; pour l'aéroport, une gare ou une longue distance, nous fixons un forfait écrit avant le départ. Appelez le ${site.phone} pour un devis gratuit.` },
+  { q: "Le taxi est-il moins cher qu'un VTC à Lille ?", a: "Cela dépend du moment. Contrairement aux VTC, le taxi ne pratique pas de tarification dynamique : aux heures de pointe, la nuit ou lors d'événements, le prix d'un taxi reste celui du compteur officiel, sans flambée soudaine." },
+  { q: "Comment payer ma course ?", a: "En carte bancaire ou en espèces, directement à bord. Une note de taxi détaillée vous est remise sur demande, utile pour vos remboursements professionnels." },
+  { q: "Y a-t-il des forfaits pour l'aéroport et les gares ?", a: `Oui, des forfaits clairs existent pour <a class="text-ink font-bold underline" href="/taxi-aeroport-lille/">l'aéroport</a>, Charleroi, Bruxelles et les longues distances. Pour les <a class="text-ink font-bold underline" href="/taxi-gare-lille-flandres/">gares de Lille</a>, la course est au compteur.` },
+];
+
+const schema = [
+  localBusinessNode({ priceRange: "€€" }),
+  breadcrumbNode([{ name: "Accueil", path: "/" }, { name: "Taxi Lille pas cher", path }]),
+  faqNode(faq),
+];
+---
+
+<Base title={title} description={description} path={path} ogImage="/assets/images/vieux-lille.webp" schema={schema}>
+  <PageHero
+    eyebrow="Tarifs transparents"
+    h1="Taxi Lille pas cher : des tarifs clairs"
+    intro="Tarif officiel au compteur, sans majoration cachée ni tarification dynamique. Forfaits annoncés à l'avance pour l'aéroport, les gares et la longue distance. Devis gratuit."
+    image="/assets/images/vieux-lille.webp"
+    imageAlt="Taxi Lille pas cher — Vieux-Lille, ASM Taxis"
+    lcp={true}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Le bon prix, sans mauvaise surprise</h2>
+      <p class="text-neutral-700 leading-relaxed mb-6">
+        Chez ASM Taxis, « pas cher » ne veut pas dire au rabais : cela veut dire <strong>juste et transparent</strong>. Les tarifs sont ceux fixés par l'arrêté préfectoral du Nord, identiques pour tous les taxis. Notre engagement : un compteur honnête, aucun supplément injustifié, et un <strong>forfait écrit à l'avance</strong> dès que vous le demandez.
+      </p>
+
+      <div class="overflow-x-auto rounded-2xl border border-neutral-200">
+        <table class="w-full text-sm">
+          <thead class="bg-ink text-white text-left">
+            <tr><th class="p-4">Élément</th><th class="p-4">Montant</th><th class="p-4 hidden sm:table-cell">Détail</th></tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-200">
+            {tarifs.map(([k, v, d]) => (
+              <tr class="hover:bg-cream">
+                <td class="p-4 font-medium">{k}</td>
+                <td class="p-4 font-bold text-ink whitespace-nowrap">{v}</td>
+                <td class="p-4 text-neutral-600 hidden sm:table-cell">{d}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-neutral-500 mt-3">
+        Montants indicatifs basés sur la réglementation taxi du département du Nord. Les tarifs kilométriques et horaires officiels sont affichés dans le véhicule. Pour un prix exact, demandez votre devis gratuit.
+      </p>
+
+      <h3 class="text-xl font-bold mt-10 mb-3">3 façons de payer moins cher, sereinement</h3>
+      <ul class="space-y-2 text-neutral-700">
+        <li>✅ <strong>Demandez un forfait</strong> pour l'aéroport ou la longue distance : prix fixe, connu d'avance.</li>
+        <li>✅ <strong>Réservez à l'avance</strong> pour optimiser le trajet et éviter l'attente facturée.</li>
+        <li>✅ <strong>Partagez le trajet</strong> à plusieurs : le prix de la course est le même, divisé entre passagers.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Tarifs taxi Lille : questions fréquentes" />
+
+  <section class="py-16 bg-cream">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <CallCta label="Obtenez votre devis gratuit" sub="Indiquez départ et destination : nous vous annonçons le prix avant de partir." />
+    </div>
+  </section>
+</Base>

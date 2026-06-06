@@ -1,0 +1,142 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string; // ex. "/taxi-aeroport-lille/"
+  ogImage?: string;
+  schema?: unknown[]; // nœuds JSON-LD à placer dans le @graph
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  ogImage = "/assets/images/grande-place-lille-noel.webp",
+  schema = [],
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(path, site.url).href;
+const ogAbsolute = new URL(ogImage, site.url).href;
+
+const graph = {
+  "@context": "https://schema.org",
+  "@graph": schema,
+};
+const GTM_ID = "GTM-W3SBRBL9";
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0b0b0c" />
+
+    <!-- Preconnect GTM (chargé après consentement) -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <!-- Preload de l'image LCP (hero) -->
+    <link rel="preload" as="image" href={ogImage} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogAbsolute} />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogAbsolute} />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+  </head>
+  <body class="bg-cream text-ink">
+    <a href="#contenu" class="skip-link">Aller au contenu</a>
+    <Header />
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Bannière de consentement cookies (RGPD) : GTM chargé seulement après accord -->
+    <div
+      id="cookie-banner"
+      class="fixed bottom-0 inset-x-0 z-[100] hidden p-4 md:p-6 bg-ink text-cream shadow-2xl border-t-4 border-taxi"
+      role="dialog"
+      aria-labelledby="cookie-title"
+      aria-live="polite"
+    >
+      <div class="container mx-auto max-w-4xl flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex-1">
+          <h2 id="cookie-title" class="text-lg font-bold mb-1">Respect de votre vie privée</h2>
+          <p class="text-sm text-neutral-300">
+            Ce site utilise des cookies de mesure d'audience (Google Tag Manager). Conformément au RGPD,
+            vous pouvez accepter ou refuser les cookies non essentiels.
+            <a href="/politique-cookies/" class="text-taxi font-medium hover:underline ml-1">En savoir plus</a>
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 shrink-0">
+          <button id="cookie-refuse" type="button" class="px-4 py-2.5 rounded-lg border border-neutral-500 text-neutral-200 hover:bg-asphalt transition-colors text-sm font-medium">Refuser</button>
+          <button id="cookie-accept" type="button" class="px-5 py-2.5 rounded-lg bg-taxi hover:bg-taxi-dark text-ink font-bold text-sm transition-colors">Tout accepter</button>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline define:vars={{ GTM_ID }}>
+      (function () {
+        const KEY = "asm-cookie-consent";
+        const banner = document.getElementById("cookie-banner");
+        const accept = document.getElementById("cookie-accept");
+        const refuse = document.getElementById("cookie-refuse");
+        function loadGTM() {
+          (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+            const f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s),
+              dl = l != "dataLayer" ? "&l=" + l : "";
+            j.async = true;
+            j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, "script", "dataLayer", GTM_ID);
+        }
+        function hide() { banner && banner.classList.add("hidden"); }
+        function set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} hide(); if (v === "accept") loadGTM(); }
+        try {
+          const c = localStorage.getItem(KEY);
+          if (c === "accept") { loadGTM(); hide(); }
+          else if (c === "refuse") { hide(); }
+          else if (banner) banner.classList.remove("hidden");
+        } catch (e) { if (banner) banner.classList.remove("hidden"); }
+        accept && accept.addEventListener("click", () => set("accept"));
+        refuse && refuse.addEventListener("click", () => set("refuse"));
+      })();
+    </script>
+  </body>
+</html>

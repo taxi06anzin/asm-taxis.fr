@@ -1,0 +1,22 @@
+---
+import Base from "../layouts/Base.astro";
+import { breadcrumbNode } from "../data/site";
+const path = "/politique-cookies/";
+const title = "Politique de cookies | ASM Taxis Lille";
+const description = "Politique de cookies d'ASM Taxis : cookies de mesure d'audience (Google Tag Manager) déposés uniquement après consentement, et gestion de vos préférences.";
+const schema = [breadcrumbNode([{ name: "Accueil", path: "/" }, { name: "Politique de cookies", path }])];
+---
+<Base title={title} description={description} path={path} schema={schema}>
+  <section class="py-14 bg-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-8">Politique de cookies</h1>
+      <div class="space-y-6 text-neutral-700 leading-relaxed">
+        <div><h2 class="text-xl font-bold mb-2">Qu'est-ce qu'un cookie ?</h2><p>Un cookie est un petit fichier déposé sur votre appareil lors de la visite d'un site. Il permet notamment de mesurer l'audience et d'améliorer l'expérience utilisateur.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">Cookies utilisés</h2><p>Ce site n'utilise que des cookies de <strong>mesure d'audience</strong> via Google Tag Manager / Google Analytics. Aucun cookie publicitaire n'est déposé.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">Consentement</h2><p>Conformément au RGPD et aux recommandations de la CNIL, ces cookies ne sont déposés qu'<strong>après votre consentement explicite</strong> via la bannière affichée à votre première visite. Tant que vous n'avez pas accepté, aucun traceur de mesure n'est chargé.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">Modifier vos préférences</h2><p>Vous pouvez à tout moment retirer votre consentement en effaçant les cookies et les données de site de votre navigateur, puis en rechargeant la page : la bannière réapparaîtra et vous pourrez refuser.</p></div>
+        <div><h2 class="text-xl font-bold mb-2">Durée de conservation</h2><p>Les cookies de mesure d'audience ont une durée de vie limitée, conforme aux recommandations de la CNIL (13 mois maximum pour le consentement).</p></div>
+      </div>
+    </div>
+  </section>
+</Base>

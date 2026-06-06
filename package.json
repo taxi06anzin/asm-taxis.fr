@@ -1,0 +1,19 @@
+{
+  "name": "asm-taxis",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Site officiel ASM Taxis — taxi Lille 24h/24, ADS Lille n°180",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.17.1",
+    "@astrojs/sitemap": "^3.7.0",
+    "tailwindcss": "^4.1.16",
+    "@tailwindcss/vite": "^4.1.16"
+  }
+}
