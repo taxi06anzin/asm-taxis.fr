@@ -75,7 +75,15 @@ export function localBusinessNode(extra: Record<string, unknown> = {}) {
       addressCountry: site.address.country,
     },
     geo: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
-    areaServed: { "@type": "City", name: "Lille" },
+    // Zone de service (SAB) : Lille + métropole lilloise (communes réellement desservies)
+    areaServed: [
+      "Lille", "Loos", "Lambersart", "La Madeleine", "Marcq-en-Barœul", "Mons-en-Barœul",
+      "Roubaix", "Tourcoing", "Villeneuve-d'Ascq", "Wasquehal", "Croix", "Hem",
+      "Marquette-lez-Lille", "Saint-André-lez-Lille", "Wambrechies", "Bondues", "Mouvaux",
+      "Haubourdin", "Ronchin", "Faches-Thumesnil", "Seclin", "Armentières", "Halluin",
+      "Comines", "Linselles", "Neuville-en-Ferrain", "Baisieux", "Lys-lez-Lannoy",
+      "Wattrelos", "Wervicq-Sud",
+    ].map((name) => ({ "@type": "City", name })),
     provider: {
       "@type": "Person",
       name: site.owner,
