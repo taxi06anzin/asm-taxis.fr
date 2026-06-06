@@ -16,10 +16,10 @@ const eur = (n: number) => n.toFixed(2).replace(".", ",") + " €";
 
 // Barème kilométrique officiel (arrêté préfectoral du Nord 2026)
 const km = [
-  ["A", "Jour (7h–19h), retour en charge — aller-retour avec le client", TARIFS.km.A],
-  ["B", "Nuit (19h–7h) ou dimanche/jour férié, retour en charge", TARIFS.km.B],
-  ["C", "Jour (7h–19h), retour à vide — aller simple", TARIFS.km.C],
-  ["D", "Nuit (19h–7h) ou dimanche/jour férié, retour à vide", TARIFS.km.D],
+  ["A", "Aller-retour avec le client (retour en charge) — jour, 7h–19h hors dimanche/férié", TARIFS.km.A],
+  ["B", "Aller-retour avec le client (retour en charge) — nuit 19h–7h, ou dimanche/jour férié", TARIFS.km.B],
+  ["C", "Aller simple (un trajet avec le client, l'autre à vide) — jour, 7h–19h", TARIFS.km.C],
+  ["D", "Aller simple (un trajet avec le client, l'autre à vide) — nuit 19h–7h, ou dimanche/jour férié", TARIFS.km.D],
 ] as const;
 
 const faq = [
