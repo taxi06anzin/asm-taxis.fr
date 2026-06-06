@@ -4,6 +4,7 @@ import PageHero from "../components/PageHero.astro";
 import Faq from "../components/Faq.astro";
 import CallCta from "../components/CallCta.astro";
 import CalcCta from "../components/CalcCta.astro";
+import AnswerBlock from "../components/AnswerBlock.astro";
 import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
 
 const path = "/taxi-gare-lille-europe/";
@@ -35,6 +36,10 @@ const schema = [
     imageAlt="Taxi gare Lille Europe et Euralille — ASM Taxis"
     lcp={true}
   />
+
+  <AnswerBlock question="Comment prendre un taxi à la gare Lille Europe (Eurostar / Euralille) ?">
+    À la gare Lille Europe, point d'arrivée de l'Eurostar et des TGV internationaux au cœur d'Euralille, ASM Taxis (ADS Lille n°{site.ads}) vous accueille à la sortie, bagages pris en charge. Indiquez votre numéro de train : nous suivons l'horaire réel, même en cas de retard. Nous desservons le centre-ville, le Vieux-Lille, votre hôtel, l'aéroport de Lesquin et toute la métropole ; un van Mercedes Classe V est disponible pour les groupes. La course est au compteur (tarif préfectoral du Nord). À noter : la gare Lille Flandres est à 400 mètres — en cas de doute, donnez-nous votre n° de train. Réservation 24h/24 au {site.phone} ou par WhatsApp ; <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-pas-cher/#calculateur">estimez votre course</a> en ligne.
+  </AnswerBlock>
 
   <section class="py-16 bg-white">
     <div class="container mx-auto px-4 max-w-3xl">

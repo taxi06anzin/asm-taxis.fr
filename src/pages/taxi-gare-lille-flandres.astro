@@ -4,6 +4,7 @@ import PageHero from "../components/PageHero.astro";
 import Faq from "../components/Faq.astro";
 import CallCta from "../components/CallCta.astro";
 import CalcCta from "../components/CalcCta.astro";
+import AnswerBlock from "../components/AnswerBlock.astro";
 import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
 
 const path = "/taxi-gare-lille-flandres/";
@@ -35,6 +36,10 @@ const schema = [
     imageAlt="Taxi gare Lille Flandres — ASM Taxis"
     lcp={true}
   />
+
+  <AnswerBlock question="Comment prendre un taxi à la gare Lille Flandres ?">
+    À la gare Lille Flandres, les taxis stationnent devant le parvis principal (place des Buisses). Pour éviter l'attente aux heures de pointe, réservez à l'avance auprès d'ASM Taxis (ADS Lille n°{site.ads}) : votre chauffeur vous attend à l'arrivée de votre TGV ou TER. Communiquez votre numéro de train, nous suivons son horaire réel, sans surcoût d'attente injustifié ; un accueil avec pancarte est possible sur demande. La course est facturée au compteur, au tarif préfectoral du Nord. La gare Lille Europe (Eurostar, TGV internationaux) n'est qu'à 400 mètres — nous desservons les deux. Réservation 24h/24 au {site.phone} ou par WhatsApp ; <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-pas-cher/#calculateur">estimez le prix de votre course</a> en ligne.
+  </AnswerBlock>
 
   <section class="py-16 bg-white">
     <div class="container mx-auto px-4 max-w-3xl">

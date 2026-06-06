@@ -4,6 +4,7 @@ import PageHero from "../components/PageHero.astro";
 import Faq from "../components/Faq.astro";
 import CallCta from "../components/CallCta.astro";
 import CalcCta from "../components/CalcCta.astro";
+import AnswerBlock from "../components/AnswerBlock.astro";
 import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
 
 const path = "/taxi-aeroport-lille/";
@@ -35,6 +36,10 @@ const schema = [
     imageAlt="Taxi aéroport Lille-Lesquin — transfert ASM Taxis"
     lcp={true}
   />
+
+  <AnswerBlock question="Comment aller à l'aéroport de Lille-Lesquin en taxi depuis Lille ?">
+    En taxi, l'aéroport de Lille-Lesquin se rejoint en 20 à 30 minutes depuis le centre de Lille (environ 12 km). ASM Taxis, artisan licencié (ADS Lille n°{site.ads}), vient vous chercher à l'adresse de votre choix et vous dépose directement au terminal, bagages portés. Le prix est celui du compteur, au tarif préfectoral du Nord (prise en charge 2,80 €, puis tarif kilométrique) ; une estimation peut être donnée à l'avance et le compteur reste la référence. Communiquez votre numéro de vol : nous suivons l'horaire réel. ASM Taxis dessert aussi Charleroi et Bruxelles-Zaventem. Réservation 24h/24 au {site.phone} ou par WhatsApp — vous pouvez aussi <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-pas-cher/#calculateur">estimer le prix de votre course</a> en ligne.
+  </AnswerBlock>
 
   <section class="py-16 bg-white">
     <div class="container mx-auto px-4 max-w-3xl">

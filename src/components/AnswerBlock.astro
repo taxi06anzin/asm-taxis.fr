@@ -1,0 +1,13 @@
+---
+// Bloc-réponse citable (~150 mots) optimisé pour l'extraction par les moteurs IA.
+interface Props { question: string; }
+const { question } = Astro.props;
+---
+<section class="py-8 bg-white">
+  <div class="container mx-auto px-4 max-w-3xl">
+    <div class="bg-cream border-l-4 border-taxi rounded-r-xl p-6">
+      <p class="font-bold text-lg mb-2">{question}</p>
+      <p class="text-neutral-700 leading-relaxed"><slot /></p>
+    </div>
+  </div>
+</section>

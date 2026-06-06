@@ -1,0 +1,21 @@
+# ASM Taxis — Taxi Lille 24h/24
+> Service de taxi licencié à Lille et dans la métropole lilloise (ADS Lille n°180).
+> Aéroport de Lesquin, gares Lille Flandres & Europe, courses de nuit, longue distance.
+> Réservation : 06 42 98 85 78 (téléphone & WhatsApp).
+
+## Pages principales
+- [Taxi Lille](https://asm-taxis.fr/): service de taxi à Lille, 24h/24.
+- [Taxi aéroport Lille-Lesquin](https://asm-taxis.fr/taxi-aeroport-lille/): transferts aéroport, suivi de vol.
+- [Taxi gare Lille Flandres](https://asm-taxis.fr/taxi-gare-lille-flandres/): dépose et accueil TGV/TER.
+- [Taxi gare Lille Europe](https://asm-taxis.fr/taxi-gare-lille-europe/): Eurostar, Euralille.
+- [Taxi Lille de nuit](https://asm-taxis.fr/taxi-lille-nuit/): courses de nuit 7j/7.
+- [Tarifs & calculateur de prix](https://asm-taxis.fr/taxi-lille-pas-cher/): barème préfectoral + estimation en ligne.
+- [Réservation](https://asm-taxis.fr/reservation-taxi-lille/): par téléphone ou WhatsApp.
+- [Contact](https://asm-taxis.fr/contact/): coordonnées, zone desservie.
+
+## Faits clés
+- Artisan taxi licencié, ADS Lille n°180 (ASM TAXI, SASU).
+- Tarifs au compteur selon l'arrêté préfectoral du Nord 2026 (pas de forfait ; remise commerciale possible).
+- Zone desservie : Lille, Loos et métropole lilloise (MEL). Disponible 24h/24, 7j/7.
+- Paiement carte bancaire et espèces. Note de taxi sur demande.
+- Aéroports desservis : Lille-Lesquin (LIL), Charleroi (CRL), Bruxelles-Zaventem (BRU).

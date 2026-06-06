@@ -4,6 +4,7 @@ import PageHero from "../components/PageHero.astro";
 import Faq from "../components/Faq.astro";
 import CallCta from "../components/CallCta.astro";
 import CalcCta from "../components/CalcCta.astro";
+import AnswerBlock from "../components/AnswerBlock.astro";
 import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
 
 const path = "/taxi-lille-nuit/";
@@ -35,6 +36,10 @@ const schema = [
     imageAlt="Taxi Lille de nuit — rue de Lille éclairée, ASM Taxis"
     lcp={true}
   />
+
+  <AnswerBlock question="Comment trouver un taxi de nuit à Lille ?">
+    ASM Taxis assure les courses de nuit à Lille, 7j/7 et 24h/24, sans heure de fermeture. Après une soirée, pour un vol matinal au départ de Lesquin, un train de nuit, une garde médicale ou un imprévu, un chauffeur licencié (ADS Lille n°{site.ads}) vous prend en charge en sécurité. La nuit (généralement 19h-7h), le dimanche et les jours fériés, le tarif appliqué au compteur est le tarif majoré prévu par l'arrêté préfectoral du Nord — le même pour tous les taxis. La réservation à l'avance est conseillée la nuit, car la demande est forte. Appelez le {site.phone} ou réservez par WhatsApp ; vous pouvez aussi <a class="text-ink font-bold underline hover:text-taxi" href="/taxi-lille-pas-cher/#calculateur">estimer votre course de nuit</a> (tarif majoré appliqué automatiquement) en ligne.
+  </AnswerBlock>
 
   <section class="py-16 bg-white">
     <div class="container mx-auto px-4 max-w-3xl">
