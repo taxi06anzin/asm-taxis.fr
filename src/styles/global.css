@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
-/* ===== Identité visuelle ASM Taxis : jaune taxi + noir (iconique) =====
-   Volontairement distincte de vtaxi-lille.fr (bleu marine + ambre). */
+/* ===== Identité visuelle ASM Taxis : jaune taxi + noir (iconique) ===== */
 @theme {
   --color-taxi: #ffce00;        /* jaune taxi */
   --color-taxi-dark: #e6b800;
