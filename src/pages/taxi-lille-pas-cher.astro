@@ -22,11 +22,26 @@ const km = [
   ["D", "Aller simple (un trajet avec le client, l'autre à vide) — nuit 19h–7h, ou dimanche/jour férié", TARIFS.km.D],
 ] as const;
 
+// Estimations indicatives sur trajets types, calculées depuis le barème (aller simple,
+// retour à vide : tarif C jour / D nuit) — fourchettes basées sur la distance routière.
+const estime = (kmDist: number, taux: number) =>
+  Math.round(Math.max(TARIFS.minimum, TARIFS.priseEnCharge + kmDist * taux));
+const fourchette = (kmMin: number, kmMax: number, taux: number) =>
+  `≈ ${estime(kmMin, taux)}–${estime(kmMax, taux)} €`;
+const trajetsTypes: [string, number, number][] = [
+  ["Gare Lille Flandres → Vieux-Lille / centre", 2, 3],
+  ["Lille centre → Marcq-en-Barœul", 6, 8],
+  ["Lille centre → Villeneuve-d'Ascq", 8, 10],
+  ["Lille centre → Aéroport de Lille-Lesquin", 10, 13],
+  ["Lille centre → Roubaix", 12, 14],
+  ["Lille centre → Tourcoing", 15, 17],
+];
+
 const faq = [
   { q: "Comment fonctionne le calculateur de prix ?", a: "Il mesure la distance routière réelle entre votre départ et votre destination (pas à vol d'oiseau) via OpenStreetMap, puis applique le barème officiel de la préfecture du Nord : prise en charge, tarif kilométrique selon l'heure (jour/nuit, dimanche/férié), suppléments et minimum de perception. Le résultat est une estimation : le prix réel est celui affiché au compteur (trafic, attente, itinéraire effectif)." },
   { q: "Le prix change-t-il la nuit, le dimanche ou les jours fériés ?", a: "Oui, comme pour tous les taxis : le tarif de nuit (19h–7h), du dimanche et des jours fériés est majoré (tarifs B/D au lieu de A/C). Si une course chevauche 19h, le calculateur répartit le trajet entre tarif jour et tarif nuit." },
   { q: "Pourquoi parler de taxi « pas cher » si les tarifs sont réglementés ?", a: "Les tarifs d'un taxi sont fixés par arrêté préfectoral : ils sont les mêmes pour tous les artisans. « Pas cher » avec ASM Taxis signifie : aucun supplément abusif, pas de tarification dynamique (surge), un compteur honnête, une estimation claire à l'avance et la possibilité d'une remise commerciale sur le montant du compteur." },
-  { q: "Puis-je connaître le prix de ma course avant de partir ?", a: `Le prix exact d'un taxi est celui affiché au compteur en fin de course : la loi interdit au chauffeur d'inventer un forfait. Nous pouvons toutefois vous donner une <strong>estimation précise</strong> à l'avance (calculateur ci-dessus ou par téléphone) et garantir un <strong>prix maximum</strong> — si le compteur dépasse ce plafond, nous appliquons une remise. Appelez le ${site.phone} pour une estimation gratuite.` },
+  { q: "Puis-je connaître le prix de ma course avant de partir ?", a: `Un chauffeur de taxi ne peut pas instituer de forfait : le compteur reste la référence légale. En revanche, un prix peut être convenu à l'avance — le taximètre reste alors enclenché et vous payez <strong>le moins cher des deux</strong> : le prix convenu ou le montant affiché au compteur. Nous vous donnons une <strong>estimation précise</strong> à l'avance (calculateur ci-dessus ou par téléphone) avec <strong>prix maximum garanti</strong>. Appelez le ${site.phone} pour une estimation gratuite.` },
   { q: "Le taxi est-il moins cher qu'un VTC à Lille ?", a: "Cela dépend du moment. Contrairement aux VTC, le taxi ne pratique pas de tarification dynamique : aux heures de pointe, la nuit ou lors d'événements, le prix d'un taxi reste celui du compteur officiel, sans flambée soudaine." },
   { q: "Comment payer ma course ?", a: "En carte bancaire ou en espèces, directement à bord. Une note de taxi détaillée vous est remise sur demande, utile pour vos remboursements professionnels." },
   { q: "Proposez-vous un prix à l'avance pour l'aéroport et les gares ?", a: `Un taxi ne peut pas créer librement de forfait : le prix est celui du compteur (tarif préfectoral). Nous vous donnons une <strong>estimation précise</strong> à l'avance pour <a class="text-ink font-bold underline" href="/taxi-aeroport-lille/">l'aéroport</a>, les <a class="text-ink font-bold underline" href="/taxi-gare-lille-flandres/">gares</a>, Charleroi, Bruxelles ou la longue distance, avec un <strong>prix maximum garanti</strong> (remise si le compteur dépasse). Estimez votre course avec le calculateur ci-dessus.` },
@@ -91,6 +106,30 @@ const schema = [
       </div>
       <p class="text-xs text-neutral-500 mt-3">
         Barème issu de l'arrêté préfectoral du Nord du 2 février 2026. Le compteur progresse par « chute » de {eur(TARIFS.chute)}. Les tarifs officiels sont affichés dans le véhicule. Un tarif neige-verglas spécial peut s'appliquer en cas de conditions hivernales (signalé par affichette).
+      </p>
+
+      <h3 class="text-xl font-bold mt-10 mb-3">Exemples d'estimations sur des trajets courants</h3>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        Pour vous donner un ordre de grandeur, voici des <strong>estimations indicatives</strong> calculées au barème officiel 2026 pour quelques trajets types (aller simple, trafic fluide) :
+      </p>
+      <div class="overflow-x-auto rounded-2xl border border-neutral-200">
+        <table class="w-full text-sm">
+          <thead class="bg-ink text-white text-left">
+            <tr><th class="p-4">Trajet</th><th class="p-4 text-right">Jour (7h–19h)</th><th class="p-4 text-right">Nuit · dim. · férié</th></tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-200">
+            {trajetsTypes.map(([nom, dMin, dMax]) => (
+              <tr class="hover:bg-cream">
+                <td class="p-4 text-neutral-700">{nom}</td>
+                <td class="p-4 font-bold text-ink whitespace-nowrap text-right">{fourchette(dMin, dMax, TARIFS.km.C)}</td>
+                <td class="p-4 font-bold text-ink whitespace-nowrap text-right">{fourchette(dMin, dMax, TARIFS.km.D)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-neutral-500 mt-3">
+        Estimations indicatives (tarifs C/D : aller simple avec retour à vide), hors attente et suppléments. Ce ne sont pas des forfaits : le prix de la course est celui affiché au compteur en fin de trajet. Pour votre trajet précis, utilisez le calculateur ci-dessus.
       </p>
 
       <h3 class="text-xl font-bold mt-10 mb-3">3 façons de payer moins cher, sereinement</h3>

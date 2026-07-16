@@ -5,6 +5,7 @@ import Faq from "../components/Faq.astro";
 import CallCta from "../components/CallCta.astro";
 import CalcCta from "../components/CalcCta.astro";
 import AnswerBlock from "../components/AnswerBlock.astro";
+import ReviewSnippets from "../components/ReviewSnippets.astro";
 import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
 
 const path = "/taxi-gare-lille-flandres/";
@@ -60,6 +61,8 @@ const schema = [
   </section>
 
   <CalcCta title="Le prix de votre course depuis la gare ?" sub="Indiquez votre destination : estimation au barème officiel, prix maximum garanti." cta="Calculer ma course" />
+
+  <ReviewSnippets authors={["Romain de B.", "Charlotte D."]} />
 
   <Faq items={faq} title="Taxi gare Lille Flandres : questions fréquentes" />
 

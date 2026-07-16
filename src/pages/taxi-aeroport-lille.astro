@@ -5,6 +5,7 @@ import Faq from "../components/Faq.astro";
 import CallCta from "../components/CallCta.astro";
 import CalcCta from "../components/CalcCta.astro";
 import AnswerBlock from "../components/AnswerBlock.astro";
+import ReviewSnippets from "../components/ReviewSnippets.astro";
 import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
 
 const path = "/taxi-aeroport-lille/";
@@ -76,6 +77,8 @@ const schema = [
   </section>
 
   <CalcCta title="Le prix de votre transfert aéroport ?" sub="Lesquin, Charleroi, Bruxelles : estimez votre course en ligne avant de réserver." cta="Estimer mon transfert aéroport" />
+
+  <ReviewSnippets authors={["Valérie G.", "Med A."]} />
 
   <Faq items={faq} title="Taxi aéroport Lille : questions fréquentes" />
 

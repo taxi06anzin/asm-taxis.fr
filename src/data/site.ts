@@ -90,6 +90,13 @@ export function localBusinessNode(extra: Record<string, unknown> = {}) {
       name: site.name,
       legalName: site.legalName,
     },
+    founder: {
+      "@type": "Person",
+      "@id": `${site.url}/#owner`,
+      name: site.owner,
+      jobTitle: "Artisan taxi",
+      worksFor: { "@id": `${site.url}/#business` },
+    },
     identifier: {
       "@type": "PropertyValue",
       propertyID: "ADS Lille (autorisation de stationnement)",

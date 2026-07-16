@@ -5,6 +5,7 @@ import Faq from "../components/Faq.astro";
 import CallCta from "../components/CallCta.astro";
 import CalcCta from "../components/CalcCta.astro";
 import AnswerBlock from "../components/AnswerBlock.astro";
+import ReviewSnippets from "../components/ReviewSnippets.astro";
 import { site, localBusinessNode, faqNode, breadcrumbNode } from "../data/site";
 
 const path = "/taxi-lille-nuit/";
@@ -66,6 +67,8 @@ const schema = [
   </section>
 
   <CalcCta title="Le prix de votre course de nuit ?" sub="Le calculateur applique automatiquement le tarif de nuit (et le pro-rata si vous partez avant 19h)." cta="Estimer ma course de nuit" />
+
+  <ReviewSnippets authors={["Marie P."]} />
 
   <Faq items={faq} title="Taxi Lille nuit : questions fréquentes" />
 

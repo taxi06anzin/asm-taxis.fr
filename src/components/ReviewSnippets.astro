@@ -1,0 +1,28 @@
+---
+// Extraits d'avis Google réels (src/data/reviews.ts) affichés sur les pages services.
+import { site } from "../data/site";
+import { reviews } from "../data/reviews";
+
+interface Props {
+  authors: string[]; // auteurs des avis à afficher (doivent exister dans reviews.ts)
+}
+const { authors } = Astro.props;
+const selected = reviews.filter((r) => authors.includes(r.author));
+---
+<section class="py-12 bg-white border-t border-neutral-100">
+  <div class="container mx-auto px-4 max-w-3xl">
+    <h2 class="text-xl font-bold mb-6 text-center">Ils ont voyagé avec ASM Taxis</h2>
+    <div class={selected.length > 1 ? "grid gap-6 md:grid-cols-2" : "max-w-xl mx-auto"}>
+      {selected.map((r) => (
+        <figure class="bg-cream rounded-2xl p-6 border border-neutral-100">
+          <div class="text-taxi mb-3" aria-hidden="true">★★★★★</div>
+          <blockquote class="text-neutral-700 text-sm leading-relaxed">“{r.text}”</blockquote>
+          <figcaption class="mt-4 font-bold text-sm">{r.author}<span class="font-normal text-neutral-500"> · client vérifié Google</span></figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="text-center mt-6">
+      <a href={site.googleProfile} target="_blank" rel="noopener noreferrer" class="text-ink font-bold underline hover:text-taxi">Voir tous les avis Google →</a>
+    </p>
+  </div>
+</section>
